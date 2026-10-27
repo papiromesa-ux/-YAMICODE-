@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="YamiCode: academia cyberpunk donde aprendes programación, desarrollo web y ciberseguridad ética construyendo proyectos reales. Gratis y sin aburrirte.">
+  <meta name="description" content="YamiCode: academia cyberpunk para aprender programación y hacking ético.">
   <meta name="theme-color" content="#0a0a12">
-  <title>YamiCode - Entra en la oscuridad. Aprende el código.</title>
+  <title>YamiCode - Entra en la oscuridad</title>
 
-  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Estilos -->
-  <link rel="stylesheet" href="css/ropa.css">
+  <!-- Ruta corregida según tu carpeta -->
+  <link rel="stylesheet" href="CSS/ropa.css">
 </head>
 <body>
 
@@ -24,10 +23,10 @@
     </a>
 
     <nav class="nav" id="nav" aria-label="Navegación principal">
-      <a href="#inicio">Inicio</a>
-      <a href="#cursos">Cursos</a>
-      <a href="#labs">Labs</a>
-      <a href="#juegos">Juegos</a>
+      <a href="index.html">Inicio</a>
+      <a href="pages/cursos.html">Cursos</a>
+      <a href="pages/labs.html">Ciberseguridad</a>
+      <a href="pages/juegos.html">Juegos</a>
       <a href="pages/perfil.html" class="btn-nav">Entrar</a>
     </nav>
 
@@ -39,7 +38,7 @@
   <!-- ============ CONTENIDO PRINCIPAL ============ -->
   <main>
 
-    <!-- HERO -->
+    <!-- HERO (La entrada principal) -->
     <section class="hero" id="inicio" aria-labelledby="hero-title">
       <div class="hero-text">
         <h1 class="hero-title" id="hero-title">
@@ -48,114 +47,56 @@
           Domina tu <span class="neon">futuro</span>.
         </h1>
         <p class="hero-sub">
-          La academia cyberpunk donde aprendes programación, desarrollo web y ciberseguridad ética
-          construyendo proyectos reales. Sin aburrirte. Sin pagar nada.
+          La academia de programación.
         </p>
         <div class="hero-btns">
-          <a href="#cursos" class="btn btn-primary">Empezar misión</a>
-          <a href="#labs" class="btn btn-ghost">Ver labs</a>
+          <a href="pages/cursos.html" class="btn btn-primary">Ver Aulas</a>
+          <a href="pages/labs.html" class="btn btn-ghost">Ir a especialidades</a>
         </div>
       </div>
 
-      <!-- Avatar: placeholder hasta que envíes la imagen/VRM real -->
+      <!-- ESPACIO PARA TU IMAGEN/VRM -->
+      <!-- Cuando tengas la imagen de Yami, cambiamos el <div> por un <img> -->
       <div class="hero-avatar">
         <div class="avatar-glow" aria-hidden="true"></div>
         <div class="avatar-box" id="avatarBox">
-          <span class="avatar-face" aria-hidden="true">[Y]</span>
-          <p class="avatar-name">Yami</p>
-          <p class="avatar-status">Tu guía en la oscuridad</p>
+          <!-- AQUÍ VA TU IMAGEN DE YAMI -->
+          <span class="avatar-face" aria-hidden="true">[Alexander]</span>
+          <p class="avatar-name"> Alexander</p>
+          <p class="avatar-status">hola yo soy Alexander</p>
         </div>
       </div>
     </section>
 
-    <!-- ¿QUÉ ES YAMICODE? -->
-    <section class="section" id="que-es" aria-labelledby="que-es-title">
-      <h2 class="section-title" id="que-es-title">¿Qué es <span class="neon">YamiCode</span>?</h2>
+    <!-- MENÚ DE NAVEGACIÓN A PÁGINAS SEPARADAS -->
+    <section class="section" id="explorar" aria-labelledby="explorar-title">
+      <h2 class="section-title" id="explorar-title">Selecciona tu  <span class="neon">Aula</span></h2>
+      <p class="section-sub">No te satures. Elige un área y enfócate en dominarla.</p>
+      
       <div class="grid-3">
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">01</div>
-          <h3>Aprende</h3>
-          <p>Misiones cortas de 5-10 minutos. Una idea por pantalla. Cero teoría aburrida.</p>
-        </article>
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">02</div>
-          <h3>Practica</h3>
-          <p>Editor de código real, retos con validación automática y proyectos que puedes mostrar.</p>
-        </article>
-        <article class="card">
-          <div class="card-icon" aria-hidden="true">03</div>
-          <h3>Protege</h3>
-          <p>Ciberseguridad y hacking ético en laboratorios aislados y autorizados. Nunca sistemas reales.</p>
-        </article>
-      </div>
-    </section>
+        <!-- TARJETA: CURSOS -->
+        <a href="pages/cursos.html" class="card card-course">
+          <div class="card-badge">Academia</div>
+          <h3> Programas </h3>
+          <p>Aprende lenguajes de programación reales como JavaScript, Python, C++ y más, desde cero hasta nivel avanzado.</p>
+          <span class="card-link">Entrar al aula -></span>
+        </a>
 
-    <!-- CURSOS -->
-    <section class="section" id="cursos" aria-labelledby="cursos-title">
-      <h2 class="section-title" id="cursos-title">Rutas de <span class="neon">aprendizaje</span></h2>
-      <div class="grid-4">
-        <a href="pages/cursos.html?area=web" class="card card-course">
-          <div class="card-badge">Web</div>
-          <h3>Desarrollo Web</h3>
-          <p>HTML · CSS · JavaScript · TypeScript · Python · PHP · Ruby · Kotlin · C · C++</p>
-          <span class="card-link">Explorar -></span>
+        <!-- TARJETA: CIBERSEGURIDAD (Separada de Hackodeo) -->
+        <a href="pages/labs.html" class="card card-course">
+          <div class="card-badge">especialidad</div>
+          <h3>Ciberseguridad</h3>
+          <p>Protege sistemas. Aprende sobre vulnerabilidades, OWASP Top 10 y defensa en entornos controlados.</p>
+          <span class="card-link">Entrar al aula -></span>
         </a>
-        <a href="pages/cursos.html?area=app" class="card card-course">
-          <div class="card-badge">App</div>
-          <h3>Desarrollo de Aplicación</h3>
-          <p>EXE · APK · Play Store · Windows Store</p>
-          <span class="card-link">Explorar -></span>
-        </a>
-        <a href="pages/cursos.html?area=software" class="card card-course">
-          <div class="card-badge">Software</div>
-          <h3>Desarrollo de Software</h3>
-          <p>Tablets · Laptops · Móvil · Computadora</p>
-          <span class="card-link">Explorar -></span>
-        </a>
-        <a href="pages/cursos.html?area=hackodeo" class="card card-course">
-          <div class="card-badge">Hackodeo</div>
-          <h3>Hackodeo Ético</h3>
-          <p>Mod APK · Mod EXE · Hackeo web · Ciberseguridad · Sistemas avanzados</p>
-          <span class="card-link">Explorar -></span>
-        </a>
-      </div>
-    </section>
 
-    <!-- LABS -->
-    <section class="section section-alt" id="labs" aria-labelledby="labs-title">
-      <h2 class="section-title" id="labs-title">Laboratorios de <span class="neon">seguridad</span></h2>
-      <p class="section-sub">Entornos aislados y autorizados. Aprende a defender atacando solo lo que es tuyo.</p>
-      <div class="grid-3">
-        <article class="card">
-          <h3>OWASP Top 10</h3>
-          <p>Los 10 riesgos más comunes en aplicaciones web, explicados con ejemplos controlados.</p>
-        </article>
-        <article class="card">
-          <h3>Apps vulnerables</h3>
-          <p>Practica en aplicaciones de prueba diseñadas para fallar. Sin riesgo legal.</p>
-        </article>
-        <article class="card">
-          <h3>Modo Yami</h3>
-          <p>Retos avanzados de sistemas y redes en entornos cerrados.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- JUEGOS -->
-    <section class="section" id="juegos" aria-labelledby="juegos-title">
-      <h2 class="section-title" id="juegos-title">Juegos <span class="neon">educativos</span></h2>
-      <p class="section-sub">Aprende sin darte cuenta. Minijuegos dentro de la web, sin instalar nada.</p>
-      <div class="grid-2">
-        <article class="card card-game">
-          <h3>Código Roto</h3>
-          <p>Repara líneas de código antes de que el timer llegue a cero.</p>
-          <span class="tag">Próximamente</span>
-        </article>
-        <article class="card card-game">
-          <h3>Caza Bugs</h3>
-          <p>Encuentra los errores escondidos en el código y elimínalos con clic.</p>
-          <span class="tag">Próximamente</span>
-        </article>
+        <!-- TARJETA: HACKODEO -->
+        <a href="pages/hackodeo.html" class="card card-course">
+          <div class="card-badge">especialidad</div>
+          <h3>Hackodeo</h3>
+          <p> especialidad en hackeó intensivo, MODs de ejecutables EXEs, APKs y técnica de hackeó intensivo a sistemas .</p>
+          <span class="card-link">Entrar al aula -></span>
+        </a>
       </div>
     </section>
 
@@ -166,8 +107,7 @@
     <div class="footer-logo">
       <span class="logo-yami">YAMI</span><span class="logo-code">CODE</span>
     </div>
-    <p>Proyecto educativo gratuito. Hecho por el equipo YamiCode: Zalgert, Perplexiti y DeepSeek.</p>
-    <p class="footer-small">Aprende. Practica. Protege.</p>
+    <p> PAPIROMESA-UX RELEASE 1 YAMICODE.</p>
   </footer>
 
   <script src="js/nav.js"></script>
