@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Minijuegos educativos de YamiCode.">
+  <meta name="theme-color" content="#0a0a12">
+  <title>Juegos - &lt;YamiCode&gt;</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Rutas relativas para la carpeta /pages -->
+  <link rel="stylesheet" href="../CSS/ropa.css">
+  
+  <style>
+    .page-header { padding-top: 100px; text-align: center; }
+    .page-title { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
+    
+    /* Estilos específicos para las tarjetas de juegos */
+    .game-card { text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
+    .game-icon { font-size: 2.5rem; font-family: 'Orbitron', sans-serif; color: var(--cian); margin-bottom: 0.5rem; font-weight: bold; }
+    .game-stats { display: flex; justify-content: center; gap: 1rem; margin: 1rem 0; font-size: 0.85rem; color: var(--texto-dim); }
+    .game-stats span { background: rgba(0, 245, 255, 0.05); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--borde); }
+    .btn-disabled { background: #333; color: #888; cursor: not-allowed; box-shadow: none; }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <a href="../index.html" class="logo" aria-label="YamiCode, ir al inicio">
+      <span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <a href="../index.html">Inicio</a>
+      <a href="aula.html">Aulas</a>
+      <a href="labs.html">Especialidades</a>
+      <!-- Aquí marcamos "Juegos" como activo -->
+      <a href="juegos.html" style="color: var(--cian);">Juegos</a>
+      <a href="perfil.html" class="btn-nav">Entrar</a>
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+      [=]
+    </button>
+  </header>
+
+  <!-- ============ CONTENIDO PRINCIPAL ============ -->
+  <main>
+    
+    <header class="page-header">
+      <h1 class="page-title">Entrena tu <span class="neon">Mente</span></h1>
+      <p class="section-sub">Aprende lógica y sintaxis sin darte cuenta. Minijuegos dentro de la plataforma.</p>
+    </header>
+
+    <section class="section">
+      <div class="grid-3">
+        
+        <!-- Juego 1 -->
+        <div class="card game-card">
+          <div>
+            <div class="game-icon">[ {} ]</div>
+            <h3>Código Roto</h3>
+            <p>Repara las líneas de código antes de que el temporizador llegue a cero.</p>
+          </div>
+          <div>
+            <div class="game-stats">
+              <span>Dificultad: Baja</span>
+              <span>XP: +50</span>
+            </div>
+            <a href="#" class="btn btn-primary" style="width: 100%;">Jugar Ahora</a>
+          </div>
+        </div>
+
+        <!-- Juego 2 -->
+        <div class="card game-card">
+          <div>
+            <div class="game-icon">[ ! ]</div>
+            <h3>Caza Bugs</h3>
+            <p>Encuentra el error lógico escondido en el sistema antes de que colapse.</p>
+          </div>
+          <div>
+            <div class="game-stats">
+              <span>Dificultad: Media</span>
+              <span>XP: +100</span>
+            </div>
+            <a href="#" class="btn btn-primary" style="width: 100%;">Jugar Ahora</a>
+          </div>
+        </div>
+
+        <!-- Juego 3 (Próximamente) -->
+        <div class="card game-card" style="opacity: 0.7;">
+          <div>
+            <div class="game-icon" style="color: var(--violeta);">[ >_ ]</div>
+            <h3>Terminal Rush</h3>
+            <p>Escribe comandos de consola a alta velocidad para hackear el mainframe de práctica.</p>
+          </div>
+          <div>
+            <div class="game-stats">
+              <span>Dificultad: Alta</span>
+              <span>XP: +250</span>
+            </div>
+            <a href="#" class="btn btn-disabled" style="width: 100%;">Próximamente</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <span class="logo-yami">YAMI</span><span class="logo-code">CODE</span>
+    </div>
+    <p>PAPIROMESA-UX RELEASE 1 YAMICODE.</p>
+  </footer>
+
+  <script src="../JS/cerebro.js"></script>
+</body>
+</html>
