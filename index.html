@@ -3,81 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="YamiCode: academia cyberpunk para aprender programación y hacking ético.">
-  <meta name="theme-color" content="#0a0a12">
   <title>&lt;YamiCode&gt; - Entra a la Academia</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Todo apunta a minúsculas: css/ropa.css y pages/... -->
   <link rel="stylesheet" href="css/ropa.css">
 </head>
 <body>
+
   <header class="header">
-    <a href="index.html" class="logo" aria-label="YamiCode, ir al inicio">
+    <a href="index.html" class="logo">
       <span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span>
     </a>
-
-    <nav class="nav" id="nav" aria-label="Navegación principal">
+    <nav class="nav" id="nav">
       <a href="index.html">Inicio</a>
-      <a href="pages/aulas.html">Aulas</a>
+      <a href="pages/aula.html">Aulas</a>
       <a href="pages/labs.html">Especialidades</a>
       <a href="pages/juegos.html">Juegos</a>
       <a href="pages/perfil.html" class="btn-nav">Entrar</a>
     </nav>
-
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
-      [=]
-    </button>
+    <button class="menu-toggle" id="menuToggle">[=]</button>
   </header>
 
-  <!-- ============ CONTENIDO PRINCIPAL ============ -->
   <main>
-
-    <!-- HERO (La entrada principal) -->
-    <section class="hero" id="inicio" aria-labelledby="hero-title">
+    <section class="hero">
       <div class="hero-text">
-        <h1 class="hero-title" id="hero-title">
+        <h1 class="hero-title">
           CODIGO <span class="neon">WEB</span>.<br>
-          CODIGO <span class="neon">APK</span>.<br>
+          CODIGO <span class="neon">MÓVIL</span>.<br>
           CODIGO <span class="neon">E.X.E</span>.
         </h1>
-        <p class="hero-sub">
-          La academia de programación.
-        </p>
+        <p class="hero-sub">La academia de programación.</p>
         <div class="hero-btns">
-          <a href="pages/aulas.html" class="btn btn-primary">Ver Aulas</a>
+          <a href="pages/aula.html" class="btn btn-primary">Ver Aulas</a>
           <a href="pages/labs.html" class="btn btn-ghost">Ir a especialidades</a>
         </div>
       </div>
 
-      <!-- ESPACIO PARA TU IMAGEN/VRM -->
-      <!-- Cuando tengas la imagen de Yami, cambiamos el <div> por un <img> -->
       <div class="hero-avatar">
-        <div class="avatar-glow" aria-hidden="true"></div>
+        <div class="avatar-glow"></div>
         <div class="avatar-box" id="avatarBox">
-          <!-- AQUÍ VA TU IMAGEN DE YAMI -->
-          <span class="avatar-face" aria-hidden="true">[A]</span>
+          <span class="avatar-face">[Y]</span>
           <p class="avatar-name">Alexander</p>
           <p class="avatar-status">Hola, yo soy Alexander</p>
         </div>
       </div>
     </section>
 
-    <!-- MENÚ DE NAVEGACIÓN A PÁGINAS SEPARADAS -->
-    <section class="section" id="explorar" aria-labelledby="explorar-title">
-      <h2 class="section-title" id="explorar-title">Selecciona tu <span class="neon">Aula</span></h2>
+    <section class="section">
+      <h2 class="section-title">Selecciona tu <span class="neon">Aula</span></h2>
       <p class="section-sub">No te satures. Elige un área y enfócate en dominarla.</p>
       
       <div class="grid-3">
-        <!-- TARJETA: CURSOS -->
-        <a href="pages/aulas.html" class="card card-course">
+        <a href="pages/aula.html" class="card card-course">
           <div class="card-badge">Academia</div>
           <h3>Programas</h3>
           <p>Aprende lenguajes de programación reales como JavaScript, Python, C++ y más, desde cero hasta nivel avanzado.</p>
           <span class="card-link">Entrar al aula -></span>
         </a>
 
-        <!-- TARJETA: CIBERSEGURIDAD -->
         <a href="pages/labs.html" class="card card-course">
           <div class="card-badge">Especialidad</div>
           <h3>Ciberseguridad</h3>
@@ -85,19 +69,16 @@
           <span class="card-link">Entrar al aula -></span>
         </a>
 
-        <!-- TARJETA: HACKODEO -->
-        <a href="pages/hackodeo.html" class="card card-course">
+        <a href="pages/labs.html" class="card card-course">
           <div class="card-badge">Especialidad</div>
           <h3>Hackodeo</h3>
-          <p>Especialidad en hacking intensivo, MODs de ejecutables EXEs, APKs y técnicas de hacking intensivo a sistemas.</p>
+          <p>Especialidad en hacking intensivo, MODs de ejecutables EXEs, APKs y técnicas de hacking a sistemas.</p>
           <span class="card-link">Entrar al aula -></span>
         </a>
       </div>
     </section>
-
   </main>
 
-  <!-- ============ FOOTER ============ -->
   <footer class="footer">
     <div class="footer-logo">
       <span class="logo-yami">YAMI</span><span class="logo-code">CODE</span>
