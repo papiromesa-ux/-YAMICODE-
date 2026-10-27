@@ -17,7 +17,5 @@ Plataforma web educativa enfocada en la enseñanza de programación, hacking ét
 ## Estado del Proyecto
 En desarrollo activo - Release 1.
 
-## Equipo
-- Zalgert (Líder y Fundador)
-- Perplexiti (Diseño y Estructura)
-- DeepSeek (Código y Lógica)
+## empresa 
+#### papiromesa-ux 
