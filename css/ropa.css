@@ -62,7 +62,7 @@ body::before { content: ''; position: fixed; inset: 0; background-image: linear-
 .avatar-face { font-size: 3rem; font-family: 'Orbitron', sans-serif; color: var(--cian); }
 .avatar-name { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: var(--cian); margin-top: 0.5rem; }
 
-/* ESTILOS PARA PÁGINAS INTERIORES (Aulas, Labs, Juegos) */
+/* ESTILOS PARA PÁGINAS INTERIORES */
 .page-header { padding-top: 120px; text-align: center; position: relative; z-index: 1; }
 .page-title { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
 .game-card { text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
