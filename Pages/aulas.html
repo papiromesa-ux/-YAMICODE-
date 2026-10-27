@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aulas de programación en YamiCode.">
+  <meta name="theme-color" content="#0a0a12">
+  <title>Aulas - &lt;YamiCode&gt;</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- OJO: Como este archivo está dentro de la carpeta /pages, tenemos que retroceder un nivel con "../" para encontrar el CSS -->
+  <link rel="stylesheet" href="../CSS/ropa.css">
+  
+  <!-- Estilos extra solo para esta página interior -->
+  <style>
+    .page-header { padding-top: 100px; text-align: center; }
+    .page-title { font-family: 'Orbitron', sans-serif; font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <a href="../index.html" class="logo" aria-label="YamiCode, ir al inicio">
+      <span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <a href="../index.html">Inicio</a>
+      <a href="cursos.html" style="color: var(--cian);">Aulas</a>
+      <a href="labs.html">Especialidades</a>
+      <a href="juegos.html">Juegos</a>
+      <a href="perfil.html" class="btn-nav">Entrar</a>
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+      [=]
+    </button>
+  </header>
+
+  <!-- ============ CONTENIDO PRINCIPAL ============ -->
+  <main>
+    
+    <header class="page-header">
+      <h1 class="page-title">Aulas de <span class="neon">Programación</span></h1>
+      <p class="section-sub">Elige tu lenguaje y comienza a construir.</p>
+    </header>
+
+    <section class="section">
+      <div class="grid-3">
+        
+        <!-- Curso 1 -->
+        <div class="card">
+          <div class="card-badge">Lenguaje</div>
+          <h3>JavaScript</h3>
+          <p>El lenguaje de la web. Aprende lógica, funciones y manipulación del DOM.</p>
+          <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: block; text-align: center;">Ingresar</a>
+        </div>
+
+        <!-- Curso 2 -->
+        <div class="card">
+          <div class="card-badge">Lenguaje</div>
+          <h3>Python</h3>
+          <p>Ideal para principiantes. Automatización, datos y desarrollo backend.</p>
+          <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: block; text-align: center;">Ingresar</a>
+        </div>
+
+        <!-- Curso 3 -->
+        <div class="card">
+          <div class="card-badge">Lenguaje</div>
+          <h3>C++</h3>
+          <p>Potencia y velocidad. Estructuras de datos, memoria y software de alto rendimiento.</p>
+          <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: block; text-align: center;">Ingresar</a>
+        </div>
+
+        <!-- Curso 4 -->
+        <div class="card">
+          <div class="card-badge">Desarrollo</div>
+          <h3>Desarrollo Web</h3>
+          <p>Construye sitios completos. Arquitectura frontend y backend.</p>
+          <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: block; text-align: center;">Ingresar</a>
+        </div>
+
+        <!-- Curso 5 -->
+        <div class="card">
+          <div class="card-badge">Desarrollo</div>
+          <h3>Aplicaciones Móviles</h3>
+          <p>Lógica detrás de las apps. Desde la idea hasta la estructura del código.</p>
+          <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: block; text-align: center;">Ingresar</a>
+        </div>
+
+        <!-- Curso 6 -->
+        <div class="card">
+          <div class="card-badge">Sistemas</div>
+          <h3>Ejecutables EXE</h3>
+          <p>Comprende cómo funcionan los programas de escritorio a bajo nivel.</p>
+          <a href="#" class="btn btn-primary" style="margin-top: 1rem; display: block; text-align: center;">Ingresar</a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-logo">
+      <span class="logo-yami">YAMI</span><span class="logo-code">CODE</span>
+    </div>
+    <p>PAPIROMESA-UX RELEASE 1 YAMICODE.</p>
+  </footer>
+
+  <!-- OJO: También tenemos que retroceder con "../" para buscar el cerebro.js -->
+  <script src="../JS/cerebro.js"></script>
+</body>
+</html>
