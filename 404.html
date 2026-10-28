@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Error 404 - &lt;YamiCode&gt;</title>
+  <title>Error de Sistema - &lt;YamiCode&gt;</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/ropa.css">
 </head>
 <body>
   <main class="hero" style="text-align: center; grid-template-columns: 1fr; justify-items: center;">
     <div class="hero-text">
-      <h1 class="hero-title" style="font-size: 6rem; line-height: 1;">404</h1>
-      <h2 class="section-title">Señal <span class="neon">Perdida</span></h2>
-      <p class="hero-sub" style="margin: 1rem auto 2rem auto;">La ruta que buscas no existe en este sector del sistema. El código ha sido eliminado o nunca existió.</p>
-      <a href="index.html" class="btn btn-primary">Volver al Inicio</a>
+      <h1 class="hero-title" id="errorCode" style="font-size: 6rem; line-height: 1; color: var(--magenta); text-shadow: 0 0 20px var(--magenta);">403</h1>
+      <h2 class="section-title" id="errorTitle" style="color: var(--magenta);">ACCESO DENEGADO</h2>
+      <p class="hero-sub" id="errorDesc" style="margin: 1rem auto 2rem auto;">El sistema anti-trampas ha bloqueado este acceso.</p>
+      <a href="index.html" class="btn btn-primary">Volver al Inicio Seguro</a>
     </div>
   </main>
+  <script src="js/sys_404.js"></script>
 </body>
 </html>
