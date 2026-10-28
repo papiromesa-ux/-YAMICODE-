@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lección 3: El mapa de la respuesta - &lt;YamiCode&gt;</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/ropa.css">
+  <style>
+    .mision-container { max-width: 800px; margin: 0 auto; padding: 2rem; background: rgba(26, 26, 46, 0.6); border: 1px solid var(--cian); border-radius: 16px; backdrop-filter: blur(10px); }
+    .teoria-box { background: rgba(0, 0, 0, 0.5); padding: 1.5rem; border-left: 4px solid var(--violeta); border-radius: 8px; margin-bottom: 2rem; }
+    .input-codigo { width: 100%; padding: 1rem; background: #000; border: 1px solid var(--texto-dim); color: #00ff88; font-family: monospace; font-size: 1.1rem; border-radius: 8px; margin-bottom: 1rem; resize: vertical; }
+    .input-codigo:focus { border-color: var(--cian); }
+    .input-codigo:disabled { opacity: 0.5; cursor: not-allowed; }
+    .feedback { display: none; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center; font-weight: bold; }
+    .exito { display: block; background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid #00ff88; }
+    .error { display: block; background: rgba(255, 46, 151, 0.1); color: var(--magenta); border: 1px solid var(--magenta); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="../index.html" class="logo"><span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span></a>
+    <nav class="nav" id="nav"><a href="../index.html">Inicio</a><a href="aula.html">Aulas</a><a href="labs.html">Especialidades</a><a href="juegos.html">Juegos</a><a href="perfil.html" class="btn-nav">Entrar</a></nav>
+  </header>
+
+  <main class="section">
+    <div class="mision-container">
+      <div class="card-badge" style="margin-bottom: 1rem;">Módulo 01 / Lección 03</div>
+      <h1 class="page-title" style="text-align: left; font-size: 2rem;">El mapa de la respuesta</h1>
+      
+      <div class="teoria-box">
+        <h3 style="color: var(--violeta); margin-bottom: 0.5rem;">El código 200</h3>
+        <p>Cuando Andrea (el servidor) recibe el mensaje de Alexander, responde con un estado. Si todo salió bien, el estado es <strong>200</strong>. Vamos a programar una condición (if) para que, si el estado es 200, el sistema muestre un mensaje de éxito.</p>
+      </div>
+
+      <h3 style="color: var(--cian); margin-bottom: 0.5rem;">Instrucción:</h3>
+      <p style="margin-bottom: 1rem;">Escribe el siguiente bloque de código exacto:</p>
+      <pre style="color:var(--texto-dim); background:#000; padding:1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; overflow-x:auto;">
+const estado = 200;
+if (estado === 200) {
+  console.log("Respuesta recibida");
+}</pre>
+
+      <label for="codigoEstudiante" class="sr-only">Escribe la estructura de la condición</label>
+      <textarea id="codigoEstudiante" class="input-codigo" rows="6" placeholder='Escribe tu código aquí...' spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+      
+      <button id="btnProbar" class="btn btn-primary" style="width: 100%;">Ejecutar Código</button>
+      <div id="feedback" class="feedback"></div>
+    </div>
+  </main>
+
+  <script>
+    const botonProbar = document.getElementById("btnProbar");
+    const codigoEstudiante = document.getElementById("codigoEstudiante");
+    const feedback = document.getElementById("feedback");
+
+    botonProbar.addEventListener("click", () => {
+      const input = codigoEstudiante.value.trim();
+
+      // Normalizamos el texto para que no falle por espacios extra, pero manteniendo la estructura
+      const respuestaNormalizada = input
+        .replace(/\r?\n/g, "\n")
+        .replace(/[ \t]+/g, " ")
+        .trim();
+
+      const respuestaCorrecta = [
+        "const estado = 200;",
+        "if (estado === 200) {",
+        '  console.log("Respuesta recibida");',
+        "}"
+      ].join("\n");
+
+      const esCorrecto = respuestaNormalizada === respuestaCorrecta;
+
+      feedback.className = "feedback";
+
+      if (esCorrecto) {
+        const moduloYaCompletado = localStorage.getItem("js_modulo1_completado") === "true";
+
+        if (!moduloYaCompletado) {
+          const xpActual = parseInt(localStorage.getItem("xp_total"), 10) || 0;
+          localStorage.setItem("xp_total", String(xpActual + 100));
+          localStorage.setItem("js_modulo1_completado", "true");
+        }
+
+        feedback.innerHTML = `
+          ¡Conexión establecida con Andrea!
+          <br><span>Recompensa: 100 XP</span><br><br>
+          <a href="js.html" class="btn btn-primary">Volver al Aula →</a>
+        `;
+        feedback.classList.add("exito");
+        botonProbar.disabled = true;
+        codigoEstudiante.disabled = true;
+      } else {
+        feedback.textContent = "El código no coincide todavía. Revisa const, estado, el número 200, la condición if, las llaves y console.log.";
+        feedback.classList.add("error");
+      }
+    });
+  </script>
+</body>
+</html>
