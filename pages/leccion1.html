@@ -6,19 +6,6 @@
   <title>Lección 1: El Primer Comando - &lt;YamiCode&gt;</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/ropa.css">
-  <style>
-    .mision-container { max-width: 800px; margin: 0 auto; padding: 2rem; background: rgba(26, 26, 46, 0.6); border: 1px solid var(--cian); border-radius: 16px; backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0, 245, 255, 0.1); }
-    .teoria-box { background: rgba(0, 0, 0, 0.5); padding: 1.5rem; border-left: 4px solid var(--violeta); border-radius: 8px; margin-bottom: 2rem; }
-    .input-codigo { width: 100%; padding: 1rem; background: #000; border: 1px solid var(--texto-dim); color: #00ff88; font-family: monospace; font-size: 1.1rem; border-radius: 8px; margin-bottom: 1rem; resize: vertical; }
-    .input-codigo:focus { border-color: var(--cian); box-shadow: 0 0 10px rgba(0, 245, 255, 0.3); }
-    .input-codigo:disabled { opacity: 0.5; cursor: not-allowed; }
-    .feedback { display: none; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center; font-weight: bold; }
-    .exito { display: block; background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid #00ff88; }
-    .error { display: block; background: rgba(255, 46, 151, 0.1); color: var(--magenta); border: 1px solid var(--magenta); }
-    
-    /* Clase de accesibilidad para lectores de pantalla */
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-  </style>
 </head>
 <body>
   <header class="header">
@@ -28,7 +15,7 @@
       <a href="aula.html">Aulas</a>
       <a href="labs.html">Especialidades</a>
       <a href="juegos.html">Juegos</a>
-      <a href="perfil.html" class="btn-nav">Entrar</a>
+      <a href="perfil.html" class="btn-nav">Mi Perfil</a>
     </nav>
     <button class="menu-toggle" id="menuToggle">[=]</button>
   </header>
@@ -58,44 +45,7 @@
     <div class="footer-logo"><span class="logo-yami">YAMI</span><span class="logo-code">CODE</span></div>
   </footer>
   
-  <script>
-    const botonProbar = document.getElementById("btnProbar");
-    const codigoEstudiante = document.getElementById("codigoEstudiante");
-    const feedback = document.getElementById("feedback");
-
-    botonProbar.addEventListener("click", () => {
-      const input = codigoEstudiante.value.trim();
-
-      const respuestasCorrectas = [
-        'console.log("Hola YamiCode");',
-        "console.log('Hola YamiCode');"
-      ];
-
-      const esCorrecto = respuestasCorrectas.includes(input);
-      feedback.className = "feedback";
-
-      if (esCorrecto) {
-        const leccionYaAprobada = localStorage.getItem("js_leccion1") === "true";
-
-        if (!leccionYaAprobada) {
-          const xpActual = parseInt(localStorage.getItem("xp_total"), 10) || 0;
-          localStorage.setItem("xp_total", String(xpActual + 50));
-          localStorage.setItem("js_leccion1", "true");
-        }
-
-        feedback.innerHTML = `
-          ¡SISTEMA RESTAURADO! Has completado la misión.
-          <br><span>Recompensa: 50 XP</span><br><br>
-          <a href="leccion2.html" class="btn btn-primary">Siguiente lección →</a>
-        `;
-        feedback.classList.add("exito");
-        botonProbar.disabled = true;
-        codigoEstudiante.disabled = true;
-      } else {
-        feedback.textContent = "El comando todavía no coincide. Revisa console.log, las comillas, el mensaje y el punto y coma.";
-        feedback.classList.add("error");
-      }
-    });
-  </script>
+  <script src="../js/cerebro.js"></script>
+  <script type="module" src="../js/sys_lec1.js"></script>
 </body>
 </html>
