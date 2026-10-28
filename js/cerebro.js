@@ -1,41 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. CONTROL DEL MENÚ MÓVIL (Verificando que exista)
-  const menuToggle = document.getElementById('menuToggle');
-  const nav = document.getElementById('nav');
+  const _uiToggle = document.getElementById('menuToggle');
+  const _uiNav = document.getElementById('nav');
 
-  if (menuToggle && nav) {
-    menuToggle.addEventListener('click', () => {
-      const isActive = nav.classList.toggle('active');
-      menuToggle.textContent = isActive ? '[X]' : '[=]';
-      menuToggle.setAttribute('aria-expanded', isActive);
+  if (_uiToggle && _uiNav) {
+    _uiToggle.addEventListener('click', () => {
+      const _isAct = _uiNav.classList.toggle('active');
+      _uiToggle.textContent = _isAct ? '[X]' : '[=]';
+      _uiToggle.setAttribute('aria-expanded', _isAct);
     });
 
-    nav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('active');
-        menuToggle.textContent = '[=]';
-        menuToggle.setAttribute('aria-expanded', 'false');
+    _uiNav.querySelectorAll('a').forEach(_link => {
+      _link.addEventListener('click', () => {
+        _uiNav.classList.remove('active');
+        _uiToggle.textContent = '[=]';
+        _uiToggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
 
-  // 2. INTERACCIÓN CON EL AVATAR (Verificando que exista)
-  const avatarBox = document.getElementById('avatarBox');
-  if (avatarBox) {
-    avatarBox.addEventListener('click', () => {
-      const face = avatarBox.querySelector('.avatar-face');
-      const nombre = avatarBox.querySelector('.avatar-name');
+  const _uiAvatar = document.getElementById('avatarBox');
+  if (_uiAvatar) {
+    _uiAvatar.addEventListener('click', () => {
+      const _fce = _uiAvatar.querySelector('.avatar-face');
+      const _nme = _uiAvatar.querySelector('.avatar-name');
       
-      if (face && nombre) {
-        const originalFace = face.textContent;
-        const originalName = nombre.textContent;
+      if (_fce && _nme) {
+        const _origFce = _fce.textContent;
+        const _origNme = _nme.textContent;
 
-        face.textContent = '...';
-        nombre.textContent = 'Cargando...';
+        _fce.textContent = '...';
+        _nme.textContent = 'Cargando...';
         
         setTimeout(() => {
-          face.textContent = originalFace;
-          nombre.textContent = originalName;
+          _fce.textContent = _origFce;
+          _nme.textContent = _origNme;
         }, 800);
       }
     });
