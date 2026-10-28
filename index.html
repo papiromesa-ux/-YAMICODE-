@@ -16,7 +16,8 @@
       <a href="pages/aula.html">Programas</a>
       <a href="pages/labs.html">Especialidades</a>
       <a href="pages/juegos.html">Juegos</a>
-      <a href="pages/perfil.html" class="btn-nav">Entrar</a>
+      <!-- Este botón cambiará con JavaScript -->
+      <a href="pages/login.html" id="navAuthBtn" class="btn-nav">Iniciar Sesión</a>
     </nav>
     <button class="menu-toggle" id="menuToggle">[=]</button>
   </header>
@@ -38,10 +39,9 @@
       <div class="hero-avatar">
         <div class="avatar-glow"></div>
         <div class="avatar-box" id="avatarBox">
-          <!-- AQUÍ IRÁ TU IMAGEN DE ALEXANDER MÁS ADELANTE -->
-          <span class="avatar-face">[Y]</span>
-          <p class="avatar-name">Alexander</p>
-          <p class="avatar-status">Hola, yo soy Alexander</p>
+          <span class="avatar-face" id="userInitial">[?]</span>
+          <p class="avatar-name" id="userName">Invitado</p>
+          <p class="avatar-status">Explora la academia</p>
         </div>
       </div>
     </section>
@@ -51,31 +51,25 @@
       <p class="section-sub">No te satures. Elige un área y enfócate en dominarla.</p>
       
       <div class="grid-3">
-        <!-- Tarjeta 1: Programas Web -->
         <a href="pages/aula.html" class="card card-course" style="text-align: center;">
           <div class="card-badge">Academia</div>
-          <!-- IMAGEN AQUÍ: pw.png -->
-          <img src="assets/img/pw.png" alt="Programación Web" style="width: 100%; max-width: 220px; height: auto; margin: 1rem auto; display: block; border-radius: 8px;">
+          <img src="assents/img/pw.png" alt="Programación Web" style="width: 100%; max-width: 220px; height: auto; margin: 1rem auto; display: block; border-radius: 8px;">
           <h3>Programas Web</h3>
           <p>Aprende lenguajes de programación para la web y software como JavaScript, Python, C++, entre otros.</p>
           <span class="card-link">Entrar al aula -></span>
         </a>
 
-        <!-- Tarjeta 2: Programas Móviles -->
         <a href="pages/apps.html" class="card card-course" style="text-align: center;">
           <div class="card-badge">Aplicaciones</div>
-          <!-- IMAGEN AQUÍ: pm.png -->
-          <img src="assets/img/pm.png" alt="Programación Móvil" style="width: 100%; max-width: 220px; height: auto; margin: 1rem auto; display: block; border-radius: 8px;">
+          <img src="assents/img/pm.png" alt="Programación Móvil" style="width: 100%; max-width: 220px; height: auto; margin: 1rem auto; display: block; border-radius: 8px;">
           <h3>Programas Móviles</h3>
           <p>Desarrollo para Android, iOS y Windows. Aprende sobre APKs, EXEs y tiendas de distribución.</p>
           <span class="card-link">Entrar al aula -></span>
         </a>
 
-        <!-- Tarjeta 3: Especialidades -->
         <a href="pages/labs.html" class="card card-course" style="text-align: center;">
           <div class="card-badge">Avanzado</div>
-          <!-- IMAGEN AQUÍ: es.png -->
-          <img src="assets/img/es.png" alt="Especialidades" style="width: 100%; max-width: 220px; height: auto; margin: 1rem auto; display: block; border-radius: 8px;">
+          <img src="assents/img/es.png" alt="Especialidades" style="width: 100%; max-width: 220px; height: auto; margin: 1rem auto; display: block; border-radius: 8px;">
           <h3>Especialidades</h3>
           <p>Ciberseguridad, Hackodeo, Gamercraft y creación de Software Móvil o de Computadora.</p>
           <span class="card-link">Entrar al área -></span>
@@ -88,25 +82,34 @@
     <div class="footer-logo"><span class="logo-yami">YAMI</span><span class="logo-code">CODE</span></div>
     <p>PAPIROMESA-UX RELEASE 1 YAMICODE.</p>
   </footer>
-  <script src="js/cerebro.js"></script>
-    <script src="js/cerebro.js"></script>
   
-  <!-- GUARDIÁN: Bloquea el acceso si no hay cuenta -->
+  <script src="js/cerebro.js"></script>
+  
   <script type="module">
     import { auth } from "./js/firebase.js";
     import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
     onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        // Si no hay usuario, lo mandamos al Login
-        window.location.href = "pages/login.html";
+      const navBtn = document.getElementById('navAuthBtn');
+      const userName = document.getElementById('userName');
+      const userInitial = document.getElementById('userInitial');
+      const userStatus = document.querySelector('.avatar-status');
+
+      if (user) {
+        // Si está logueado
+        const correoUsuario = user.email.split('@')[0];
+        userName.textContent = correoUsuario;
+        userInitial.textContent = correoUsuario.charAt(0).toUpperCase();
+        userStatus.textContent = "Hacker en línea";
+        navBtn.textContent = "Mi Perfil";
+        navBtn.href = "pages/perfil.html";
       } else {
-        // Si hay usuario, actualizamos el nombre de Alexander por el de su cuenta
-        const nombreUsuario = document.querySelector('.avatar-name');
-        const correoUsuario = user.email.split('@')[0]; // Sacamos la primera parte del correo
-        if (nombreUsuario) {
-          nombreUsuario.textContent = correoUsuario; // El nombre cambia según quién entró
-        }
+        // Si NO está logueado (Invitado)
+        userName.textContent = "Invitado";
+        userInitial.textContent = "[?]";
+        userStatus.textContent = "Explora la academia";
+        navBtn.textContent = "Iniciar Sesión";
+        navBtn.href = "pages/login.html";
       }
     });
   </script>
