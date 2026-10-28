@@ -6,20 +6,6 @@
   <title>Acceso al Sistema - &lt;YamiCode&gt;</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/ropa.css">
-  <style>
-    .login-container { max-width: 400px; margin: 80px auto; padding: 2rem; background: rgba(26, 26, 46, 0.6); border: 1px solid var(--cian); border-radius: 16px; backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0, 245, 255, 0.1); text-align: center; }
-    .form-group { margin-bottom: 1rem; text-align: left; }
-    .form-group label { display: block; color: var(--cian); font-size: 0.9rem; margin-bottom: 0.5rem; }
-    .form-group input { width: 100%; padding: 0.8rem; background: #000; border: 1px solid var(--texto-dim); color: var(--texto); border-radius: 8px; outline: none; font-family: 'Rajdhani', sans-serif; font-size: 1rem; }
-    .form-group input:focus { border-color: var(--cian); }
-    .btn-google { background: #fff; color: #333; width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 1rem; font-weight: bold; border: none; padding: 0.8rem; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-    .btn-google:hover { background: #ddd; }
-    .toggle-text { margin-top: 1.5rem; color: var(--texto-dim); font-size: 0.9rem; }
-    .toggle-text span { color: var(--magenta); cursor: pointer; font-weight: bold; }
-    .mensaje { display: none; padding: 1rem; border-radius: 8px; margin-top: 1rem; font-weight: bold; font-size: 0.9rem; }
-    .error { display: block; background: rgba(255, 46, 151, 0.1); color: var(--magenta); border: 1px solid var(--magenta); }
-    .exito { display: block; background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid #00ff88; }
-  </style>
 </head>
 <body>
   <header class="header">
@@ -39,159 +25,42 @@
       <p class="section-sub" style="margin-bottom: 2rem;" id="formSub">Bienvenido de vuelta, hacker.</p>
 
       <form id="authForm">
-        <!-- Campo de Nombre (Solo visible en Registro) -->
         <div class="form-group" id="groupName" style="display: none;">
           <label for="name">Nombre de Hacker</label>
           <input type="text" id="name" placeholder="Ej: Zalgert" minlength="3">
         </div>
-
         <div class="form-group">
           <label for="email">Correo Electrónico</label>
           <input type="email" id="email" placeholder="tu@correo.com" required>
         </div>
-        
         <div class="form-group">
           <label for="password">Contraseña</label>
           <input type="password" id="password" placeholder="••••••••" required minlength="6">
         </div>
-
-        <!-- Campo Confirmar Contraseña (Solo visible en Registro) -->
         <div class="form-group" id="groupConfirm" style="display: none;">
           <label for="confirmPassword">Confirmar Contraseña</label>
           <input type="password" id="confirmPassword" placeholder="••••••••" minlength="6">
         </div>
-        
         <button type="submit" id="btnSubmit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Entrar al Sistema</button>
       </form>
 
       <div id="mensaje" class="mensaje"></div>
-
       <div style="margin: 1.5rem 0; border-bottom: 1px solid var(--texto-dim); position: relative;">
         <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #12121f; padding: 0 10px; color: var(--texto-dim); font-size: 0.8rem;">O</span>
       </div>
-
       <button id="btnGoogle" class="btn-google">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="20" alt="Google">
-        Continuar con Google
+        Entrar con Google
       </button>
-
-      <p class="toggle-text" id="toggleTextContainer">
-        ¿No tienes cuenta? <span id="toggleMode">Regístrate aquí</span>
-      </p>
+      <p class="toggle-text" id="toggleTextContainer">¿No tienes cuenta? <span id="toggleMode">Regístrate aquí</span></p>
     </div>
   </main>
 
   <footer class="footer">
-    <div class="footer-logo"><span class="logo-yami">YAMI</span><span class="logo-code">CODE</span></div>
+    <div class="footer-logo"><span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span></div>
   </footer>
 
   <script src="../js/cerebro.js"></script>
-  
-  <script type="module">
-    import { auth } from "../js/firebase.js";
-    import { 
-      signInWithEmailAndPassword, 
-      createUserWithEmailAndPassword,
-      GoogleAuthProvider,
-      signInWithPopup,
-      onAuthStateChanged,
-      updateProfile
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-    // GUARDIÁN: Si ya está logueado, lo mandamos al Index
-    onAuthStateChanged(auth, (user) => {
-      if (user) window.location.href = "../index.html"; 
-    });
-
-    let isLogin = true;
-    const form = document.getElementById('authForm');
-    const btnSubmit = document.getElementById('btnSubmit');
-    const mensaje = document.getElementById('mensaje');
-    const toggleContainer = document.getElementById('toggleTextContainer');
-    
-    // Elementos del formulario
-    const groupName = document.getElementById('groupName');
-    const groupConfirm = document.getElementById('groupConfirm');
-    const formTitle = document.getElementById('formTitle');
-    const formSub = document.getElementById('formSub');
-
-    // Lógica del botón de cambio (Login <-> Registro)
-    toggleContainer.addEventListener('click', (e) => {
-      if (e.target.id === 'toggleMode') {
-        isLogin = !isLogin;
-        mensaje.className = "mensaje";
-
-        if (isLogin) {
-          // Configuración para Login
-          formTitle.innerHTML = "Iniciar <span class='neon'>Sesión</span>";
-          formSub.textContent = "Bienvenido de vuelta, hacker.";
-          btnSubmit.textContent = "Entrar al Sistema";
-          groupName.style.display = "none";
-          groupConfirm.style.display = "none";
-          toggleContainer.innerHTML = '¿No tienes cuenta? <span id="toggleMode">Regístrate aquí</span>';
-        } else {
-          // Configuración para Registro
-          formTitle.innerHTML = "Crear <span class='neon'>Cuenta</span>";
-          formSub.textContent = "Únete a la academia.";
-          btnSubmit.textContent = "Registrarme";
-          groupName.style.display = "block";
-          groupConfirm.style.display = "block";
-          toggleContainer.innerHTML = '¿Ya tienes cuenta? <span id="toggleMode">Inicia sesión aquí</span>';
-        }
-      }
-    });
-
-    // Lógica del formulario
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      
-      btnSubmit.textContent = "Cargando...";
-      btnSubmit.disabled = true;
-
-      try {
-        if (isLogin) {
-          await signInWithEmailAndPassword(auth, email, password);
-        } else {
-          // Verificar que las contraseñas coincidan
-          const confirmPass = document.getElementById('confirmPassword').value;
-          if (password !== confirmPass) {
-            throw new Error("Las contraseñas no coinciden.");
-          }
-
-          const nombre = document.getElementById('name').value;
-          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          
-          // Guardamos el nombre en el perfil de Firebase
-          await updateProfile(userCredential.user, { displayName: nombre });
-        }
-      } catch (error) {
-        let msj = error.message || "Error: Revisa tus datos.";
-        if (error.code === 'auth/invalid-credential') msj = "Correo o contraseña incorrectos.";
-        if (error.code === 'auth/email-already-in-use') msj = "Este correo ya está registrado.";
-        if (error.code === 'auth/weak-password') msj = "La contraseña debe tener al menos 6 caracteres.";
-        
-        mostrarMensaje(msj, "error");
-        btnSubmit.textContent = isLogin ? "Entrar al Sistema" : "Registrarme";
-        btnSubmit.disabled = false;
-      }
-    });
-
-    // Lógica de Google
-    document.getElementById('btnGoogle').addEventListener('click', async () => {
-      const provider = new GoogleAuthProvider();
-      try {
-        await signInWithPopup(auth, provider);
-      } catch (error) {
-        mostrarMensaje("Error al conectar con Google.", "error");
-      }
-    });
-
-    function mostrarMensaje(texto, tipo) {
-      mensaje.textContent = texto;
-      mensaje.className = `mensaje ${tipo}`;
-    }
-  </script>
+  <script type="module" src="../js/sys_login.js"></script>
 </body>
 </html>
