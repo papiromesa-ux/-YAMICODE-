@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-const firebaseConfig = {
+const _sysConfig = {
   apiKey: "AIzaSyCJLUtvrmiCuGqFu4_gj5P9vH4kUhDa2yA",
   authDomain: "darkcode-3691d.firebaseapp.com",
   projectId: "darkcode-3691d",
@@ -11,5 +11,5 @@ const firebaseConfig = {
   measurementId: "G-Y0L9D69KJ7"
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+const _appCore = initializeApp(_sysConfig);
+export const _secAuth = getAuth(_appCore);
