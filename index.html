@@ -34,14 +34,17 @@
           <a href="pages/labs.html" class="btn btn-ghost">Ir a especialidades</a>
         </div>
       </div>
-      <div class="hero-avatar">
-        <div class="avatar-glow"></div>
-        <div class="avatar-box" id="avatarBox">
-          <span class="avatar-face" id="userInitial">[?]</span>
-          <p class="avatar-name" id="userName">Invitado</p>
-          <p class="avatar-status" id="userStatus">Explora la academia</p>
-        </div>
-      </div>
+     <div class="hero-avatar">
+  <div class="avatar-glow"></div>
+  <div class="avatar-box" id="avatarBox" style="position: relative; overflow: hidden; padding: 0;">
+    <div id="vrm-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1;"></div>
+    
+    <div style="position: absolute; bottom: 1rem; left: 0; width: 100%; text-align: center; z-index: 2; pointer-events: none;">
+      <p class="avatar-name" style="margin: 0; text-shadow: 0 0 10px #000;">Alexander</p>
+      <p class="avatar-status" style="text-shadow: 0 0 5px #000; font-family: monospace; color: #00ff88; font-size: 0.8rem; margin-top: 5px;">SYS.AVATAR // ONLINE</p>
+    </div>
+  </div>
+</div>
     </section>
 
     <section class="section">
