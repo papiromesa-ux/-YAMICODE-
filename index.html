@@ -89,5 +89,26 @@
     <p>PAPIROMESA-UX RELEASE 1 YAMICODE.</p>
   </footer>
   <script src="js/cerebro.js"></script>
+    <script src="js/cerebro.js"></script>
+  
+  <!-- GUARDIÁN: Bloquea el acceso si no hay cuenta -->
+  <script type="module">
+    import { auth } from "./js/firebase.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        // Si no hay usuario, lo mandamos al Login
+        window.location.href = "pages/login.html";
+      } else {
+        // Si hay usuario, actualizamos el nombre de Alexander por el de su cuenta
+        const nombreUsuario = document.querySelector('.avatar-name');
+        const correoUsuario = user.email.split('@')[0]; // Sacamos la primera parte del correo
+        if (nombreUsuario) {
+          nombreUsuario.textContent = correoUsuario; // El nombre cambia según quién entró
+        }
+      }
+    });
+  </script>
 </body>
 </html>
