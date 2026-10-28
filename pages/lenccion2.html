@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lección 2: El mensajero y la torre - &lt;YamiCode&gt;</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/ropa.css">
+  <style>
+    .mision-container { max-width: 800px; margin: 0 auto; padding: 2rem; background: rgba(26, 26, 46, 0.6); border: 1px solid var(--cian); border-radius: 16px; backdrop-filter: blur(10px); }
+    .teoria-box { background: rgba(0, 0, 0, 0.5); padding: 1.5rem; border-left: 4px solid var(--violeta); border-radius: 8px; margin-bottom: 2rem; }
+    .input-codigo { width: 100%; padding: 1rem; background: #000; border: 1px solid var(--texto-dim); color: #00ff88; font-family: monospace; font-size: 1.1rem; border-radius: 8px; margin-bottom: 1rem; resize: vertical; }
+    .input-codigo:focus { border-color: var(--cian); }
+    .input-codigo:disabled { opacity: 0.5; cursor: not-allowed; }
+    .feedback { display: none; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center; font-weight: bold; }
+    .exito { display: block; background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid #00ff88; }
+    .error { display: block; background: rgba(255, 46, 151, 0.1); color: var(--magenta); border: 1px solid var(--magenta); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="../index.html" class="logo"><span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span></a>
+    <nav class="nav" id="nav"><a href="../index.html">Inicio</a><a href="aula.html">Aulas</a><a href="labs.html">Especialidades</a><a href="juegos.html">Juegos</a><a href="perfil.html" class="btn-nav">Entrar</a></nav>
+  </header>
+
+  <main class="section">
+    <div class="mision-container">
+      <div class="card-badge" style="margin-bottom: 1rem;">Módulo 01 / Lección 02</div>
+      <h1 class="page-title" style="text-align: left; font-size: 2rem;">El mensajero y la torre</h1>
+      
+      <div class="teoria-box">
+        <h3 style="color: var(--violeta); margin-bottom: 0.5rem;">El envío de datos</h3>
+        <p>Cuando visitas una página, el navegador (el mensajero) solicita archivos a un servidor (la torre). Para que Alexander pueda enviarle un mensaje a Andrea, necesita guardar la dirección del servidor de ella en una <strong>variable</strong>.</p>
+      </div>
+
+      <h3 style="color: var(--cian); margin-bottom: 0.5rem;">Instrucción:</h3>
+      <p style="margin-bottom: 1rem;">Crea una constante llamada <code>direccion</code> y asígnale el texto <code>https://yamicode.web</code> usando comillas dobles.</p>
+
+      <label for="codigoEstudiante" class="sr-only">Escribe la constante direccion</label>
+      <textarea id="codigoEstudiante" class="input-codigo" rows="3" placeholder='Ej: const nombre = "valor";' spellcheck="false" autocomplete="off" autocapitalize="off"></textarea>
+      
+      <button id="btnProbar" class="btn btn-primary" style="width: 100%;">Enviar Mensaje</button>
+      <div id="feedback" class="feedback"></div>
+    </div>
+  </main>
+
+  <script>
+    const botonProbar = document.getElementById("btnProbar");
+    const codigoEstudiante = document.getElementById("codigoEstudiante");
+    const feedback = document.getElementById("feedback");
+
+    botonProbar.addEventListener("click", () => {
+      const input = codigoEstudiante.value.trim();
+      const respuestaCorrecta = 'const direccion = "https://yamicode.web";';
+      
+      // Perplexiti sugirió limpiar espacios extra
+      const respuestaNormalizada = input.replace(/\s+/g, " ").trim();
+
+      if (respuestaNormalizada === respuestaCorrecta) {
+        const leccionYaAprobada = localStorage.getItem("js_leccion2") === "true";
+
+        if (!leccionYaAprobada) {
+          const xpActual = parseInt(localStorage.getItem("xp_total"), 10) || 0;
+          localStorage.setItem("xp_total", String(xpActual + 50));
+          localStorage.setItem("js_leccion2", "true");
+        }
+
+        feedback.innerHTML = `
+          ¡Mensaje enviado a la torre de Andrea!
+          <br><span>Recompensa: 50 XP</span><br><br>
+          <a href="leccion3.html" class="btn btn-primary">Siguiente lección →</a>
+        `;
+        feedback.className = "feedback exito";
+        botonProbar.disabled = true;
+        codigoEstudiante.disabled = true;
+      } else {
+        feedback.textContent = "La dirección no coincide. Revisa const, el nombre direccion, el signo =, las comillas y el punto y coma.";
+        feedback.className = "feedback error";
+      }
+    });
+  </script>
+</body>
+</html>
