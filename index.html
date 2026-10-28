@@ -8,16 +8,14 @@
   <link rel="stylesheet" href="css/ropa.css">
 </head>
 <body>
-
   <header class="header">
     <a href="index.html" class="logo"><span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span></a>
     <nav class="nav" id="nav">
-      <a href="index.html">Inicio</a>
-      <a href="pages/aula.html">Programas</a>
-      <a href="pages/labs.html">Especialidades</a>
-      <a href="pages/juegos.html">Juegos</a>
-      <!-- Este botón cambiará con JavaScript -->
-      <a href="pages/login.html" id="navAuthBtn" class="btn-nav">Iniciar Sesión</a>
+      <a href="index.html">&lt;Inicio&gt;</a>
+      <a href="pages/aula.html">&lt;Programas&gt;</a>
+      <a href="pages/labs.html">&lt;Especialidades&gt;</a>
+      <a href="pages/juegos.html">&lt;Juegos&gt;</a>
+      <a href="pages/login.html" id="navAuthBtn" class="btn-nav">&lt;Iniciar Sesión&gt;</a>
     </nav>
     <button class="menu-toggle" id="menuToggle">[=]</button>
   </header>
@@ -26,22 +24,22 @@
     <section class="hero">
       <div class="hero-text">
         <h1 class="hero-title">
-          CODIGO <span class="neon">WEB</span>.<br>
-          CODIGO <span class="neon">MÓVIL</span>.<br>
-          CODIGO <span class="neon">E.X.E</span>.
+          &lt;YAMI<span class="neon">CODE&gt;</span>.<br>
+          &lt;YAMI<span class="neon">CODE&gt;</span>.<br>
+          &lt;YAMI<span class="neon">CODE&gt;</span>.
         </h1>
-        <p class="hero-sub">La academia de programación.</p>
+        <p class="hero-sub">&lt;La academia de programación.&gt;</p>
         <div class="hero-btns">
-          <a href="pages/aula.html" class="btn btn-primary">Ver Programas</a>
-          <a href="pages/labs.html" class="btn btn-ghost">Ir a especialidades</a>
+          <a href="pages/aula.html" class="btn btn-primary">&lt;Ver Programas&gt;</a>
+          <a href="pages/labs.html" class="btn btn-ghost">&lt;Ir a especialidades&gt;</a>
         </div>
       </div>
       <div class="hero-avatar">
         <div class="avatar-glow"></div>
         <div class="avatar-box" id="avatarBox">
-          <span class="avatar-face" id="userInitial">[?]</span>
-          <p class="avatar-name" id="userName">Invitado</p>
-          <p class="avatar-status">Explora la academia</p>
+          <span class="avatar-face" id="userInitial">[>⁠.⁠<]</span>
+          <p class="avatar-name" id="userName">&lt;Invitado&gt;</p>
+          <p class="avatar-status" id="userStatus">&lt;Explora la academia&gt;</p>
         </div>
       </div>
     </section>
@@ -52,24 +50,24 @@
       
       <div class="grid-3">
         <a href="pages/aula.html" class="card card-course" style="text-align: center;">
-          <div class="card-badge">Academia</div>
-          <img src="assents/img/pw.png" alt="Programación Web" style="width: 100%; max-width: 220px; height: auto; margin: 1rem auto; display: block; border-radius: 8px;">
+          <div class="card-badge">&lt;Academia&gt;</div>
+          <img src="album/img/pw.png" alt="Programación Web" class="card-img">
           <h3>Programas Web</h3>
           <p>Aprende lenguajes de programación para la web y software como JavaScript, Python, C++, entre otros.</p>
           <span class="card-link">Entrar al aula -></span>
         </a>
 
         <a href="pages/apps.html" class="card card-course" style="text-align: center;">
-          <div class="card-badge">Aplicaciones</div>
-          <img src="assents/img/pm.png" alt="Programación Móvil" style="width: 100%; max-width: 220px; height: auto; margin: 1rem auto; display: block; border-radius: 8px;">
-          <h3>Programas Móviles</h3>
-          <p>Desarrollo para Android, iOS y Windows. Aprende sobre APKs, EXEs y tiendas de distribución.</p>
+          <div class="card-badge">&lt;Academia&gt;</div>
+          <img src="album/img/pm.png" alt="Programación Móvil" class="card-img">
+          <h3>desarrollo de aplicación</h3>
+          <p>Desarrollo de aplicación de tiendas verificadas y sin verificación.</p>
           <span class="card-link">Entrar al aula -></span>
         </a>
 
         <a href="pages/labs.html" class="card card-course" style="text-align: center;">
-          <div class="card-badge">Avanzado</div>
-          <img src="assents/img/es.png" alt="Especialidades" style="width: 100%; max-width: 220px; height: auto; margin: 1rem auto; display: block; border-radius: 8px;">
+          <div class="card-badge">&lt;Especialidad&gt;</div>
+          <img src="album/img/es.png" alt="Especialidades" class="card-img">
           <h3>Especialidades</h3>
           <p>Ciberseguridad, Hackodeo, Gamercraft y creación de Software Móvil o de Computadora.</p>
           <span class="card-link">Entrar al área -></span>
@@ -84,42 +82,6 @@
   </footer>
   
   <script src="js/cerebro.js"></script>
-  
-  <script type="module">
-    import { auth } from "./js/firebase.js";
-    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-    onAuthStateChanged(auth, (user) => {
-      const navBtn = document.getElementById('navAuthBtn');
-      const userName = document.getElementById('userName');
-      const userInitial = document.getElementById('userInitial');
-      const userStatus = document.querySelector('.avatar-status');
-
-      if (user) {
-        // Si está logueado
-        const correoUsuario = user.email.split('@')[0];
-        userName.textContent = correoUsuario;
-        userInitial.textContent = correoUsuario.charAt(0).toUpperCase();
-        userStatus.textContent = "Hacker en línea";
-        navBtn.textContent = "Mi Perfil";
-        navBtn.href = "pages/perfil.html";
-      } else {
-        // Si NO está logueado (Invitado)
-        userName.textContent = "Invitado";
-        userInitial.textContent = "[?]";
-        userStatus.textContent = "Explora la academia";
-        navBtn.textContent = "Iniciar Sesión";
-        navBtn.href = "pages/login.html";
-  <script type="module">
-    import { auth } from "../js/firebase.js";
-    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        alert("ACCESO RESTRINGIDO: Debes iniciar sesión para acceder a las misiones.");
-        window.location.href = "login.html"; 
-      }
-    });
-  </script>
+  <script type="module" src="js/sys_index.js"></script>
 </body>
 </html>
