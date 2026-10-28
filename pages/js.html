@@ -15,7 +15,7 @@
       <a href="aula.html">Aulas</a>
       <a href="labs.html">Especialidades</a>
       <a href="juegos.html">Juegos</a>
-      <a href="perfil.html" class="btn-nav">Entrar</a>
+      <a href="perfil.html" class="btn-nav">Mi Perfil</a>
     </nav>
     <button class="menu-toggle" id="menuToggle">[=]</button>
   </header>
@@ -27,14 +27,11 @@
     </header>
 
     <section class="section">
-      <!-- Banner de bienvenida con barra de progreso -->
       <div class="banner-box premium-glass" style="height: auto; min-height: 250px; padding: 2rem; margin-bottom: 3rem; display: flex; flex-direction: column; align-items: center; justify-content: center;">
         <div class="banner-content" style="width: 100%; max-width: 600px;">
           <span class="card-badge">Aula activa</span>
           <h2>Bienvenido al Núcleo</h2>
           <p>Completa las misiones para desbloquear nuevos módulos.</p>
-
-          <!-- Barra de progreso -->
           <div class="progress-box" style="margin-top: 1.5rem; width: 100%;">
             <div class="progress-label" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--texto-dim); font-size: 0.9rem;">
               <span>Progreso general</span>
@@ -50,19 +47,16 @@
       <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Mapa de Misiones</h2>
       
       <div class="grid-3">
-        <!-- Módulo 1 -->
         <div class="card premium-glass" style="border-left: 4px solid var(--cian);">
           <div class="card-badge" style="background: rgba(0, 245, 255, 0.2);">Módulo 01</div>
           <h3>El mapa de la Web</h3>
           <p>Aprende cómo funciona internet y la estructura básica de una página.</p>
           <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
             <span id="progresoModulo1" style="font-family: monospace; color: var(--texto-dim); font-size: 0.8rem;">0/3 Lecciones</span>
-            <!-- Botón corregido para ir a la Lección 1 -->
             <a href="leccion1.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Iniciar</a>
           </div>
         </div>
 
-        <!-- Módulo 2 (Preparado para desbloquearse) -->
         <div id="modulo2" class="card premium-glass locked-module">
           <div class="card-badge" style="background: rgba(255, 255, 255, 0.1); color: var(--texto-dim);">Bloqueado</div>
           <h3>El taller del desarrollador</h3>
@@ -73,7 +67,6 @@
           </div>
         </div>
 
-        <!-- Módulo 3 -->
         <div class="card premium-glass locked-module">
           <div class="card-badge" style="background: rgba(255, 255, 255, 0.1); color: var(--texto-dim);">Bloqueado</div>
           <h3>Los cimientos HTML</h3>
@@ -93,55 +86,6 @@
   </footer>
   
   <script src="../js/cerebro.js"></script>
-  
-  <!-- Lógica del Progreso y Desbloqueo -->
-  <script>
-    // 1. Calcular Progreso
-    const leccionesModulo1 = ["js_leccion1", "js_leccion2", "js_leccion3"];
-    const completadas = leccionesModulo1.filter(leccion => localStorage.getItem(leccion) === "true").length;
-    
-    // Actualizar texto del Módulo 1
-    const progresoModulo1 = document.getElementById("progresoModulo1");
-    if (progresoModulo1) {
-      progresoModulo1.textContent = `${completadas}/${leccionesModulo1.length} Lecciones`;
-    }
-
-    // Actualizar barra general (Asumiendo 3 lecciones en total para el 100% de este módulo)
-    const porcentaje = Math.round((completadas / leccionesModulo1.length) * 100);
-    const porcentajeTexto = document.getElementById("progresoGeneral");
-    const barra = document.getElementById("barraProgreso");
-
-    if (porcentajeTexto) porcentajeTexto.textContent = `${porcentaje}%`;
-    if (barra) barra.style.width = `${porcentaje}%`;
-
-    // 2. Desbloquear Módulo 2 si el Módulo 1 está completo
-    const modulo1Completado = localStorage.getItem("js_modulo1_completado") === "true";
-    const modulo2 = document.getElementById("modulo2");
-
-    if (modulo1Completado && modulo2) {
-      modulo2.classList.remove("locked-module");
-      // Le damos un borde cian para indicar que está activo
-      modulo2.style.borderLeft = "4px solid var(--cian)"; 
-      
-      const badge = modulo2.querySelector(".card-badge");
-      badge.textContent = "Módulo 02";
-      badge.style.background = "rgba(0, 245, 255, 0.2)";
-      badge.style.color = "var(--texto)";
-
-      const textoBloqueo = modulo2.querySelector(".texto-bloqueo");
-      textoBloqueo.textContent = "0/5 Lecciones";
-      textoBloqueo.style.color = "var(--texto-dim)";
-
-      const botonViejo = modulo2.querySelector("button");
-      const nuevoEnlace = document.createElement("a");
-      nuevoEnlace.href = "modulo2.html"; // A futuro
-      nuevoEnlace.className = "btn btn-primary";
-      nuevoEnlace.style.padding = "0.5rem 1rem";
-      nuevoEnlace.style.fontSize = "0.9rem";
-      nuevoEnlace.textContent = "Iniciar";
-      
-      botonViejo.replaceWith(nuevoEnlace);
-    }
-  </script>
+  <script type="module" src="../js/sys_js.js"></script>
 </body>
 </html>
