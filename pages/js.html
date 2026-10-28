@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aula de JavaScript - &lt;YamiCode&gt;</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/ropa.css">
+</head>
+<body>
+  <header class="header">
+    <a href="../index.html" class="logo"><span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span></a>
+    <nav class="nav" id="nav">
+      <a href="../index.html">Inicio</a>
+      <a href="aula.html">Aulas</a>
+      <a href="labs.html">Especialidades</a>
+      <a href="juegos.html">Juegos</a>
+      <a href="perfil.html" class="btn-nav">Entrar</a>
+    </nav>
+    <button class="menu-toggle" id="menuToggle">[=]</button>
+  </header>
+
+  <main>
+    <header class="page-header">
+      <h1 class="page-title">Aula de <span class="neon">JavaScript</span></h1>
+      <p class="section-sub">Inicia tu camino para convertirte en Desarrollador Web.</p>
+    </header>
+
+    <section class="section">
+      <!-- Banner de bienvenida -->
+      <div class="banner-box premium-glass" style="height: 250px; margin-bottom: 3rem;">
+        <div class="banner-content">
+          <h2>Bienvenido al Núcleo</h2>
+          <p>Completa los módulos para desbloquear el siguiente nivel.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Mapa de Misiones</h2>
+      
+      <div class="grid-3">
+        <!-- Módulo 1 -->
+        <div class="card premium-glass" style="border-left: 4px solid var(--cian);">
+          <div class="card-badge" style="background: rgba(0, 245, 255, 0.2);">Módulo 01</div>
+          <h3>El mapa de la Web</h3>
+          <p>Aprende cómo funciona internet y la estructura básica de una página.</p>
+          <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-family: monospace; color: var(--texto-dim); font-size: 0.8rem;">0/5 Lecciones</span>
+            <a href="#" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Iniciar</a>
+          </div>
+        </div>
+
+        <!-- Módulo 2 -->
+        <div class="card premium-glass locked-module">
+          <div class="card-badge" style="background: rgba(255, 255, 255, 0.1); color: var(--texto-dim);">Bloqueado</div>
+          <h3>El taller del desarrollador</h3>
+          <p>Configura tu entorno y prepara tus herramientas de trabajo.</p>
+          <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-family: monospace; color: var(--texto-dim); font-size: 0.8rem;">-- Lecciones</span>
+            <button class="btn btn-ghost" style="padding: 0.5rem 1rem; font-size: 0.9rem; cursor: not-allowed;" disabled>[X]</button>
+          </div>
+        </div>
+
+        <!-- Módulo 3 -->
+        <div class="card premium-glass locked-module">
+          <div class="card-badge" style="background: rgba(255, 255, 255, 0.1); color: var(--texto-dim);">Bloqueado</div>
+          <h3>Los cimientos HTML</h3>
+          <p>Construye la estructura base de cualquier sitio web.</p>
+          <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-family: monospace; color: var(--texto-dim); font-size: 0.8rem;">-- Lecciones</span>
+            <button class="btn btn-ghost" style="padding: 0.5rem 1rem; font-size: 0.9rem; cursor: not-allowed;" disabled>[X]</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-logo"><span class="logo-yami">YAMI</span><span class="logo-code">CODE</span></div>
+    <p>PAPIROMESA-UX RELEASE 1 YAMICODE.</p>
+  </footer>
+  <script src="../js/cerebro.js"></script>
+</body>
+</html>
