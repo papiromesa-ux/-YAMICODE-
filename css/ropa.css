@@ -89,3 +89,39 @@ body::before { content: ''; position: fixed; inset: 0; background-image: linear-
   .hero { grid-template-columns: 1fr; text-align: center; padding: 3rem 1.2rem; }
   .hero-btns { justify-content: center; }
 }
+/* ESTILOS PREMIUM PARA EL AULA */
+.premium-glass {
+  background: rgba(26, 26, 46, 0.4) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 245, 255, 0.15) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+.locked-module {
+  opacity: 0.6;
+  filter: grayscale(80%);
+  transition: all 0.3s ease;
+}
+.locked-module:hover {
+  opacity: 0.8;
+  filter: grayscale(40%);
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.banner-box {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #000, var(--violeta));
+}
+.banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(10, 10, 18, 0.7);
+  border-radius: 12px;
+}
