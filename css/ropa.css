@@ -112,3 +112,14 @@ body::before { content: ''; position: fixed; inset: 0; background-image: linear-
 .exito { display: block; background: rgba(0, 255, 136, 0.1); color: #00ff88; border: 1px solid #00ff88; }
 .error { display: block; background: rgba(255, 46, 151, 0.1); color: var(--magenta); border: 1px solid var(--magenta); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* BLOQUEO DE SELECCIÓN DE TEXTO EN MODO EXAMEN */
+body.en-examen { 
+  -webkit-touch-callout: none; 
+  -webkit-user-select: none; 
+  user-select: none; 
+}
+body.en-examen input, body.en-examen textarea { 
+  -webkit-user-select: text; 
+  user-select: text; 
+}
