@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>Acceso Bloqueado - YamiCode</title>
+  <style>
+    body { background: #000; color: #fff; font-family: monospace; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; text-align: center; padding: 20px; overflow: hidden; }
+    body::before { content: ""; position: fixed; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px); animation: barrido 7s linear infinite; }
+    body::after { content: ""; position: fixed; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 40%, transparent 40%, rgba(0,0,0,.65) 100%); }
+    .box { position: relative; z-index: 1; border: 2px solid #dc2626; padding: 40px 20px; border-radius: 16px; background: #1a0000; box-shadow: 0 0 30px rgba(220, 38, 38, 0.5); max-width: 400px; animation: entra .45s cubic-bezier(.2,.9,.3,1.2), latido 2.4s ease-in-out .5s infinite; }
+    h1 { color: #dc2626; font-size: 2rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; position: relative; animation: glitch 3.2s steps(1) infinite; }
+    p { color: #a1a1aa; font-size: 1rem; line-height: 1.6; margin-bottom: 20px; }
+    .codigo { color: #4ade80; font-weight: bold; background: #000; padding: 5px 10px; border-radius: 5px; display: inline-block; margin-bottom: 20px;}
+    .motivo { color: #fca5a5; font-size: .9rem; border-left: 3px solid #dc2626; text-align: left; padding: 6px 10px; margin: 0 0 20px; background: rgba(220,38,38,.08); }
+    .consejo { font-size: .8rem; color: #71717a; margin: -6px 0 20px; }
+    button { background: #dc2626; color: #fff; border: none; padding: 15px 30px; font-size: 1rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: transform 0.1s; width: 100%; }
+    button:active { transform: scale(0.95); }
+    @keyframes entra { from { opacity: 0; transform: scale(.85) translateY(20px); } to { opacity: 1; transform: none; } }
+    @keyframes latido { 0%,100% { box-shadow: 0 0 30px rgba(220,38,38,.45); } 50% { box-shadow: 0 0 52px rgba(220,38,38,.8); } }
+    @keyframes barrido { to { background-position-y: 60px; } }
+    @keyframes glitch { 0%,92%,100% { transform: none; text-shadow: none; } 93% { transform: translateX(-3px); text-shadow: 3px 0 #22d3ee, -3px 0 #f472b6; } 95% { transform: translateX(3px); text-shadow: -3px 0 #22d3ee, 3px 0 #f472b6; } 97% { transform: translateX(-1px); text-shadow: 2px 0 #22d3ee; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="box" role="alert">
+    <h1>&lt; ANTITRAMPA &gt;</h1>
+    <p>Has hecho un movimiento o gesto sospechoso.</p>
+    <p class="motivo" id="motivo" hidden></p>
+    <p class="codigo">El progreso de esta lección ha sido cancelado.</p>
+    <p>Por favor, vuelve a la academia y no hagas movimientos sospechosos.</p>
+    <p class="consejo"> si esto te parece una equivocación pone el reporte.</p>
+    <button onclick="window.location.href='./index.html'">Volver a YamiCode</button>
+  </div>
+  <script>
+    (function () {
+      var MOTIVOS = {
+        "multitarea": "Saliste de la lección (Inicio, multitarea o cambio de app).",
+        "ventana": "Otra ventana o pantalla se abrió sobre la lección.",
+        "asistente": "Se abrió el asistente o un gesto del sistema desde el borde de la pantalla.",
+        "barra-estado": "Se abrió la barra de estado del sistema.",
+        "gesto-sistema": "Se detectó un gesto del sistema.",
+        "ventana-dividida": "La ventana se redujo (pantalla dividida o ventana flotante).",
+        "inspector": "Se intentó abrir las herramientas para inspeccionar el código.",
+        "menu-contextual": "Se abrió el menú contextual.",
+        "doble-toque": "Se detectó un doble toque fuera del editor.",
+        "atras": "Se usó el botón o gesto de atrás."
+      };
+      try {
+        var q = new URLSearchParams(location.search);
+        var m = q.get("motivo");
+        if (!m) return;
+        var reincidente = /-reincidente$/.test(m);
+        var base = m.replace(/-reincidente$/, "");
+        var texto = MOTIVOS[base];
+        if (!texto) return;
+        if (reincidente) texto += " Ya habías usado tus avisos de esta lección.";
+        var el = document.getElementById("motivo");
+        el.textContent = "Motivo: " + texto;
+        el.hidden = false;
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>
