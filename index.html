@@ -9,17 +9,38 @@
 </head>
 <body>
 
-  <!-- /// 1. HEADER \\\ -->
+  <!-- /// 1. HEADER (Solo Logo y Botón de Menú) \\\ -->
   <header class="header">
-    <a href="index.html" class="logo"><span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span></a>
-    <nav class="nav" id="nav">
-      <a href="index.html">&lt;Inicio&gt;</a>
-      <a href="pages/aula.html">&lt;Programas&gt;</a>
-      <a href="pages/labs.html">&lt;Especialidades&gt;</a>
-      <a href="pages/juegos.html">&lt;Juegos&gt;</a>
-      <a href="pages/login.html" id="navAuthBtn" class="btn-nav">Iniciar Sesión</a>
-    </nav>
+    <a href="index.html" class="logo">
+      <span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span>
+    </a>
+    
     <button class="menu-toggle" id="menuToggle">[=]</button>
+
+    <!-- EL MENÚ DESPLEGABLE (Con todo adentro) -->
+    <nav class="nav" id="nav">
+      <div class="nav-title">SISTEMA</div>
+      <a href="index.html">Inicio</a>
+      <a href="pages/aula.html">Programas</a>
+      <a href="pages/labs.html">Especialidades</a>
+      <a href="pages/juegos.html">Juegos</a>
+      
+      <div class="nav-divider"></div>
+      
+      <div class="nav-title">HERRAMIENTAS</div>
+      <button id="btnAbrirDescargas" class="nav-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Descargas
+      </button>
+      <button id="btnAbrirReportes" class="nav-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        Reportes
+      </button>
+
+      <div class="nav-divider"></div>
+      
+      <a href="pages/login.html" class="btn-nav" style="text-align: center; margin-top: 10px;">Iniciar Sesión</a>
+    </nav>
   </header>
 
   <main>
@@ -37,62 +58,22 @@
           <a href="pages/labs.html" class="btn btn-ghost">&lt;Ir a especialidades&gt;</a>
         </div>
       </div>
-
-      <!-- /// 3. CAJA DEL AVATAR 3D (ESTILO GESTOR DE DESCARGAS) \\\ -->
-<div class="hero-avatar">
-  <div class="avatar-glow"></div>
-  <div class="avatar-box" id="avatarBox" style="position: relative; overflow: hidden; padding: 0; background: #0a0a12;">
-    
-    <!-- Aquí irá el lienzo 3D cuando cargue -->
-    <div id="vrm-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1;"></div>
-
-    <!-- PANEL DE DESCARGAS (Estilo Call of Duty) -->
-    <div id="panel-descargas" style="position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; background: rgba(10, 10, 18, 0.95); border: 1px solid var(--borde);">
       
-      <!-- Pestañas (Kiosco, Modelos, Otros) -->
-      <div style="display: flex; border-bottom: 1px solid var(--borde); background: rgba(0,0,0,0.5);">
-        <button class="tab-descarga" style="flex: 1; padding: 10px; background: transparent; border: none; color: var(--texto-dim); font-weight: bold; cursor: not-allowed; opacity: 0.5;">Kiosco</button>
-        <button class="tab-descarga" style="flex: 1; padding: 10px; background: rgba(0, 245, 255, 0.1); border: none; color: var(--cian); font-weight: bold; border-bottom: 2px solid var(--cian); cursor: default;">Modelos</button>
-        <button class="tab-descarga" style="flex: 1; padding: 10px; background: transparent; border: none; color: var(--texto-dim); font-weight: bold; cursor: not-allowed; opacity: 0.5;">Otros</button>
-      </div>
-
-      <!-- Contenido de la pestaña "Modelos" -->
-      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 1rem;">
-        
-        <!-- Fila del archivo Alexander -->
-        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
-          <div style="text-align: left;">
-            <p style="color: var(--texto); font-weight: bold; font-size: 0.9rem; margin: 0;">Alexander.vrm</p>
-            <p style="color: var(--texto-dim); font-size: 0.75rem; margin: 0;">7.75 MB</p>
-          </div>
+      <!-- /// 3. CAJA DEL AVATAR 3D \\\ -->
+      <div class="hero-avatar">
+        <div class="avatar-glow"></div>
+        <div class="avatar-box" id="avatarBox" style="position: relative; overflow: hidden; padding: 0; width: 320px; height: 420px;">
           
-          <!-- Botón de descarga (Flecha) -->
-          <button id="btnDescargarModelo" style="background: #333; border: 1px solid var(--borde); color: #fff; width: 40px; height: 40px; border-radius: 4px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-          </button>
-        </div>
+          <div id="vrm-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1;"></div>
+          
+          <div id="texto-avatar" style="display: none; position: absolute; bottom: 1rem; left: 0; width: 100%; text-align: center; z-index: 2; pointer-events: none;">
+            <p class="avatar-name" id="nombre-avatar-actual" style="margin: 0; text-shadow: 0 0 10px #000; font-size: 1.5rem;">Alexander</p>
+            <p class="avatar-status" style="text-shadow: 0 0 5px #000; font-family: monospace; color: #00ff88; font-size: 0.8rem; margin-top: 5px;">ONLINE</p>
+          </div>
 
-        <!-- Barra de progreso (oculta al inicio) -->
-        <div id="barra-progreso-3d" style="display: none; width: 100%; height: 6px; background: #000; border-radius: 3px; margin-top: 15px; border: 1px solid var(--borde); overflow: hidden;">
-          <div id="progreso-fill" style="width: 0%; height: 100%; background: var(--cian); transition: width 0.2s;"></div>
         </div>
-        <p id="texto-progreso" style="display: none; text-align: center; color: var(--cian); font-size: 0.8rem; margin-top: 5px;">0%</p>
-
       </div>
-    </div>
-
-    <!-- Texto que aparece abajo del avatar (SOLO cuando ya cargó) -->
-    <div id="texto-avatar" style="display: none; position: absolute; bottom: 1rem; left: 0; width: 100%; text-align: center; z-index: 2; pointer-events: none;">
-      <p class="avatar-name" style="margin: 0; text-shadow: 0 0 10px #000;">Alexander</p>
-      <p class="avatar-status" style="text-shadow: 0 0 5px #000; font-family: monospace; color: #00ff88; font-size: 0.8rem; margin-top: 5px;">ONLINE</p>
-    </div>
-
-  </div>
-</div>
+    </section>
 
     <!-- /// 4. RUTAS DE APRENDIZAJE \\\ -->
     <section class="section">
@@ -127,13 +108,84 @@
     </section>
   </main>
 
-    <!-- /// 5. FOOTER \\\ -->
+  <!-- /// 5. MENÚ LATERAL DE DESCARGAS (Se abre desde el menú) \\\ -->
+  <div id="modal-descargas" class="modal-overlay" style="display: none; justify-content: flex-end; align-items: flex-start; padding-top: 80px; padding-right: 20px;">
+    <div class="modal-box" style="width: 350px; background: #0a0a12; border: 1px solid var(--cian); box-shadow: 0 0 30px rgba(0, 245, 255, 0.2);">
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h3 style="color: var(--cian); margin: 0; font-family: 'Orbitron', sans-serif;">Gestor de Descargas</h3>
+        <button id="btnCerrarDescargas" style="background: transparent; border: none; color: var(--magenta); font-size: 1.5rem; cursor: pointer;">&times;</button>
+      </div>
+
+      <div style="display: flex; border-bottom: 1px solid var(--borde); margin-bottom: 15px;">
+        <button class="tab-descarga" style="flex: 1; padding: 10px; background: transparent; border: none; color: var(--texto-dim); opacity: 0.5;">Kiosco</button>
+        <button class="tab-descarga" style="flex: 1; padding: 10px; background: rgba(0, 245, 255, 0.1); border: none; color: var(--cian); border-bottom: 2px solid var(--cian);">Modelos</button>
+        <button class="tab-descarga" style="flex: 1; padding: 10px; background: transparent; border: none; color: var(--texto-dim); opacity: 0.5;">Otros</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <!-- Alexander -->
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+          <div style="text-align: left;">
+            <p style="color: var(--texto); font-weight: bold; font-size: 0.9rem; margin: 0;">Alexander.vrm</p>
+            <p style="color: var(--texto-dim); font-size: 0.75rem; margin: 0;">7.75 MB</p>
+          </div>
+          <div style="display: flex; gap: 5px;">
+            <button class="btn-descargar-modelo" data-modelo="alexander" data-nombre="Alexander" style="background: #1a1a2e; border: 1px solid var(--borde); color: var(--cian); width: 35px; height: 35px; border-radius: 4px; cursor: pointer; display: flex; justify-content: center; align-items: center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </button>
+            <button class="btn-eliminar-modelo" data-modelo="alexander" style="background: #330000; border: 1px solid var(--magenta); color: var(--magenta); width: 35px; height: 35px; border-radius: 4px; cursor: pointer; display: none; justify-content: center; align-items: center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Andrea -->
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+          <div style="text-align: left;">
+            <p style="color: var(--texto); font-weight: bold; font-size: 0.9rem; margin: 0;">Andrea.vrm</p>
+            <p style="color: var(--texto-dim); font-size: 0.75rem; margin: 0;">9.51 MB</p>
+          </div>
+          <div style="display: flex; gap: 5px;">
+            <button class="btn-descargar-modelo" data-modelo="andrea" data-nombre="Andrea" style="background: #1a1a2e; border: 1px solid var(--borde); color: var(--cian); width: 35px; height: 35px; border-radius: 4px; cursor: pointer; display: flex; justify-content: center; align-items: center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            </button>
+            <button class="btn-eliminar-modelo" data-modelo="andrea" style="background: #330000; border: 1px solid var(--magenta); color: var(--magenta); width: 35px; height: 35px; border-radius: 4px; cursor: pointer; display: none; justify-content: center; align-items: center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de progreso -->
+      <div id="barra-progreso-3d" style="display: none; width: 100%; height: 6px; background: #000; border-radius: 3px; margin-top: 15px; border: 1px solid var(--borde); overflow: hidden;">
+        <div id="progreso-fill" style="width: 0%; height: 100%; background: var(--cian); transition: width 0.2s;"></div>
+      </div>
+      <p id="texto-progreso" style="display: none; text-align: center; color: var(--cian); font-size: 0.8rem; margin-top: 5px;">0%</p>
+    </div>
+  </div>
+
+  <!-- /// 6. MODAL DE REPORTES \\\ -->
+  <div id="modal-reportes" class="modal-overlay" style="display: none; z-index: 10005;">
+    <div class="modal-box" style="max-width: 400px; background: #0a0a12; border: 1px solid var(--magenta); box-shadow: 0 0 30px rgba(255, 46, 151, 0.2);">
+      <h3 style="color: var(--magenta); margin-top: 0; font-family: 'Orbitron', sans-serif;">Reportar un Error</h3>
+      <p style="color: var(--texto-dim); font-size: 0.9rem;">Si encontraste un fallo, tienes una recomendación o necesitas ayuda, contáctanos:</p>
+      
+      <div style="background: rgba(255,46,151,0.1); border: 1px solid var(--magenta); padding: 15px; border-radius: 8px; text-align: center; margin: 20px 0;">
+        <p style="margin: 0; font-size: 0.8rem; color: var(--texto-dim);">Llámanos o envía un mensaje al:</p>
+        <p style="margin: 5px 0 0 0; font-size: 1.5rem; font-weight: bold; color: var(--magenta);">+503 6840 5099</p>
+      </div>
+
+      <button id="btnCerrarReportes" class="btn btn-primary" style="width: 100%;">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- /// 7. FOOTER Y SCRIPTS \\\ -->
   <footer class="footer">
     <div class="footer-logo"><span class="logo-yami">YAMI</span><span class="logo-code">CODE</span></div>
     <p>PAPIROMESA-UX RELEASE 1 YAMICODE.</p>
   </footer>
   
-  <!-- /// 6. SCRIPTS Y MAPA DE RUTAS (Para el 3D local) \\\ -->
   <script type="importmap">
     {
       "imports": {
