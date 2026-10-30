@@ -200,3 +200,170 @@ body::before { content: ''; position: fixed; inset: 0; background-image: linear-
 }
 .card-linux:hover { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
 .card-linux .btn { background: linear-gradient(135deg, #ffd700, #00f5ff); color: #000; }
+
+/* /// 13. PARCHE DE ESTILOS FALTANTES (RELEASE 1) \\\ */
+
+/* --- Encabezados de Página (Aula, Labs, Apps, etc.) --- */
+.page-header {
+  text-align: center;
+  padding: 4rem 2rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+.page-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--texto);
+  margin-bottom: 0.5rem;
+}
+.btn-nav {
+  transition: all 0.3s ease;
+  display: block;
+}
+.btn-nav:hover {
+  background: rgba(0, 245, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+}
+
+/* --- Efectos Visuales (Premium Glass y Glow) --- */
+.premium-glass {
+  background: rgba(10, 10, 18, 0.6) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 245, 255, 0.2) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+.avatar-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(123, 44, 191, 0.4) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+  animation: pulse 3s infinite alternate;
+}
+
+/* --- Tarjetas y Módulos Bloqueados (js.html) --- */
+.locked-module {
+  opacity: 0.5;
+  filter: grayscale(0.8);
+  pointer-events: none;
+  user-select: none;
+}
+.progress-box {
+  background: #000;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.texto-bloqueo {
+  color: var(--texto-dim);
+  font-size: 0.8rem;
+  font-family: monospace;
+}
+
+/* --- Minijuegos (juegos.html) --- */
+.game-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.game-icon {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  color: var(--cian);
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+}
+.game-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--texto-dim);
+  margin: 1rem 0;
+  font-family: monospace;
+  border-top: 1px dashed var(--borde);
+  padding-top: 0.5rem;
+}
+.btn-disabled {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--texto-dim);
+  cursor: not-allowed;
+  box-shadow: none;
+  border: 1px solid transparent;
+}
+
+/* --- Colores Auxiliares (Bordes y Botones) --- */
+.border-cian { border-color: var(--cian) !important; }
+.border-magenta { border-color: var(--magenta) !important; }
+.badge-magenta { background: rgba(255, 46, 151, 0.1) !important; color: var(--magenta) !important; border-color: rgba(255, 46, 151, 0.3) !important; }
+.btn-magenta { background: linear-gradient(135deg, var(--magenta), var(--violeta)) !important; color: #fff !important; }
+
+/* --- Alerta Anti-Trampas (sys_antitrampas.js) --- */
+.dc-alerta-trampa {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 500px;
+  background: #0a0a12;
+  border: 2px solid var(--magenta);
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(255, 46, 151, 0.4);
+  z-index: 99999;
+  overflow: hidden;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.dc-alerta-cuerpo {
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.dc-alerta-cuerpo strong {
+  color: var(--magenta);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+}
+.dc-alerta-cuerpo span {
+  color: var(--texto);
+  font-size: 0.9rem;
+}
+.dc-alerta-barra {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.dc-alerta-barra i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--magenta);
+  transform-origin: left;
+}
+.dc-alerta-barra i.corre {
+  animation: cuenta-regresiva linear forwards;
+}
+@keyframes cuenta-regresiva {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+.dc-alerta-trampa[data-estado="ok"] {
+  border-color: #00ff88;
+  box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+}
+.dc-alerta-trampa[data-estado="ok"] strong { color: #00ff88; }
+.dc-alerta-trampa[data-estado="ok"] .dc-alerta-barra { display: none; }
+
+/* --- Seguridad Visual en Modo Examen --- */
+body.en-examen {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
