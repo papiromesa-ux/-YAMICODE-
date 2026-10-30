@@ -3,49 +3,73 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { VRMLoaderPlugin, VRMUtils } from './libs/three-vrm.module.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const _pestañas = document.querySelectorAll('.tab-descarga');
-  _pestañas.forEach(_tab => {
-    _tab.addEventListener('click', () => {
-      if (_tab.textContent === 'Modelos') return;
-      alert("La sección " + _tab.textContent + " estará disponible pronto.");
-    });
+  
+  // /// 1. LÓGICA PARA CERRAR EL MENÚ \\\
+  const _nav = document.getElementById('nav');
+  const _navLinks = _nav.querySelectorAll('a');
+  _navLinks.forEach(link => {
+    link.addEventListener('click', () => _nav.classList.remove('active'));
   });
 
-  const _btnDescargar = document.getElementById('btnDescargarModelo');
-  if (!_btnDescargar) return;
+  // /// 2. LÓGICA DEL MENÚ DE DESCARGAS \\\
+  const _modalDescargas = document.getElementById('modal-descargas');
+  const _btnAbrirDescargas = document.getElementById('btnAbrirDescargas');
+  const _btnCerrarDescargas = document.getElementById('btnCerrarDescargas');
 
-  _btnDescargar.addEventListener('click', async () => {
-    _btnDescargar.style.display = 'none';
-    const _barraFondo = document.getElementById('barra-progreso-3d');
-    const _barraFill = document.getElementById('progreso-fill');
-    const _textoProgreso = document.getElementById('texto-progreso');
-    const _panelDescargas = document.getElementById('panel-descargas');
-    const _textoAvatar = document.getElementById('texto-avatar');
-    const _vrmContainer = document.getElementById('vrm-container');
+  _btnAbrirDescargas.addEventListener('click', () => {
+    _nav.classList.remove('active'); // Cierra el menú
+    _modalDescargas.style.display = 'flex';
+  });
+  _btnCerrarDescargas.addEventListener('click', () => _modalDescargas.style.display = 'none');
 
+  // /// 3. LÓGICA DEL MENÚ DE REPORTES \\\
+  const _modalReportes = document.getElementById('modal-reportes');
+  const _btnAbrirReportes = document.getElementById('btnAbrirReportes');
+  const _btnCerrarReportes = document.getElementById('btnCerrarReportes');
+
+  _btnAbrirReportes.addEventListener('click', () => {
+    _nav.classList.remove('active'); // Cierra el menú
+    _modalReportes.style.display = 'flex';
+  });
+  _btnCerrarReportes.addEventListener('click', () => _modalReportes.style.display = 'none');
+
+  // /// 4. CARGAR MODELO 3D \\\
+  const _vrmContainer = document.getElementById('vrm-container');
+  const _textoAvatar = document.getElementById('texto-avatar');
+  const _nombreAvatarActual = document.getElementById('nombre-avatar-actual');
+  const _barraFondo = document.getElementById('barra-progreso-3d');
+  const _barraFill = document.getElementById('progreso-fill');
+  const _textoProgreso = document.getElementById('texto-progreso');
+
+  const _botonesDescargar = document.querySelectorAll('.btn-descargar-modelo');
+  const _botonesEliminar = document.querySelectorAll('.btn-eliminar-modelo');
+
+  window.cargarModelo3D = async (nombreModelo, nombreMostrar) => {
+    _botonesDescargar.forEach(b => b.style.display = 'none');
+    _botonesEliminar.forEach(b => b.style.display = 'none');
+    
     _barraFondo.style.display = 'block';
     _textoProgreso.style.display = 'block';
-    _textoProgreso.textContent = "Descargando Alexander...";
+    _textoProgreso.textContent = "Descargando " + nombreMostrar + "...";
+    _barraFill.style.width = '0%';
 
     try {
-      const response = await fetch('Modelos/Modelos%20de%20preterminado/alexander.vrm');
+      const ruta = `Modelos/Modelos%20de%20preterminado/${nombreModelo}.vrm`;
+      const response = await fetch(ruta);
       if (!response.ok) throw new Error("No se encontró el archivo .vrm");
+      
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
 
       const _scene = new THREE.Scene();
       const _camera = new THREE.PerspectiveCamera(30, _vrmContainer.clientWidth / _vrmContainer.clientHeight, 0.1, 20);
       
-      // Ajuste de cámara: Apuntamos al centro del pecho de Alexander
-      _camera.position.set(0, 1.3, 2.5);
+      // Cámara ajustada (Z=4.5) para que se vea completo en el cuadro grande
+      _camera.position.set(0, 1.4, 4.5);
       _camera.lookAt(0, 1.2, 0);
 
       const _renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      _renderer.setSize(_vrmContainer.clientWidth, _vrmContainer.clientHeight);
       _renderer.setPixelRatio(window.devicePixelRatio);
-      
-      // Agregamos un fondo de prueba para saber si el lienzo está dibujando
-      _renderer.setClearColor(0x000000, 0); // Fondo transparente
       
       const _loader = new GLTFLoader();
       _loader.register((parser) => new VRMLoaderPlugin(parser));
@@ -53,29 +77,24 @@ document.addEventListener('DOMContentLoaded', () => {
       _loader.load(
         url, 
         (gltf) => {
-          _panelDescargas.style.display = 'none';
+          _modalDescargas.style.display = 'none';
           _textoAvatar.style.display = 'block';
+          _nombreAvatarActual.textContent = nombreMostrar;
           _vrmContainer.innerHTML = '';
           
+          _renderer.setSize(_vrmContainer.clientWidth, _vrmContainer.clientHeight);
           _vrmContainer.appendChild(_renderer.domElement);
 
           const _vrm = gltf.userData.vrm;
-          
-          // Arreglamos la orientación si es un VRM versión 0
           VRMUtils.rotateVRM0(_vrm);
-          
-          // Limpieza y añadido a la escena
           _vrm.scene.position.set(0, 0, 0);
           _scene.add(_vrm.scene);
 
-          // Luces más potentes para que resalte
-          const _ambient = new THREE.AmbientLight(0xffffff, 1.5);
+          const _ambient = new THREE.AmbientLight(0xffffff, 1.2);
           _scene.add(_ambient);
-          
           const _lightCyan = new THREE.DirectionalLight(0x00f5ff, 3);
           _lightCyan.position.set(2, 3, 2);
           _scene.add(_lightCyan);
-          
           const _lightMagenta = new THREE.DirectionalLight(0xff2e97, 3);
           _lightMagenta.position.set(-2, 3, 1);
           _scene.add(_lightMagenta);
@@ -86,13 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const _delta = _clock.getDelta();
             if (_vrm) {
               _vrm.update(_delta);
-              _vrm.scene.position.y = Math.sin(_clock.elapsedTime) * 0.05; // Flotación
+              _vrm.scene.position.y = Math.sin(_clock.elapsedTime) * 0.05;
             }
             _renderer.render(_scene, _camera);
           };
           _animate();
 
-          // Forzamos el tamaño por si el contenedor cambió al ocultar el panel
           setTimeout(() => {
             _renderer.setSize(_vrmContainer.clientWidth, _vrmContainer.clientHeight);
             _camera.aspect = _vrmContainer.clientWidth / _vrmContainer.clientHeight;
@@ -104,16 +122,42 @@ document.addEventListener('DOMContentLoaded', () => {
             _camera.updateProjectionMatrix();
             _renderer.setSize(_vrmContainer.clientWidth, _vrmContainer.clientHeight);
           });
+
+          document.querySelector(`.btn-eliminar-modelo[data-modelo="${nombreModelo}"]`).style.display = 'flex';
         },
-        undefined,
+        (xhr) => {
+          if (xhr.total > 0) {
+            const _porcentaje = Math.round((xhr.loaded / xhr.total) * 100);
+            _barraFill.style.width = _porcentaje + '%';
+            _textoProgreso.textContent = _porcentaje + '%';
+          }
+        },
         (error) => {
           console.error("Error al dibujar:", error);
-          alert("El archivo se descargó pero falló al dibujarse.");
+          alert("Error al dibujar el modelo.");
         }
       );
     } catch (error) {
       console.error("Error crítico:", error);
-      alert("🚨 Error de conexión. Asegúrate de que el archivo .vrm esté en su lugar.");
+      alert("🚨 No se pudo descargar el modelo. Revisa tu conexión.");
     }
+  };
+
+  _botonesDescargar.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const modelo = e.currentTarget.getAttribute('data-modelo');
+      const nombre = e.currentTarget.getAttribute('data-nombre');
+      cargarModelo3D(modelo, nombre);
+    });
   });
+
+  _botonesEliminar.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const modelo = e.currentTarget.getAttribute('data-modelo');
+      if (confirm("¿Seguro que quieres eliminar " + modelo + " de la memoria? Se tendrá que volver a descargar.")) {
+        location.reload();
+      }
+    });
+  });
+
 });
