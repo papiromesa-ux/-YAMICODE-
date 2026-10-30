@@ -1,36 +1,42 @@
-// /// 1. IMPORTACIONES (Cambiamos a jsDelivr que es más difícil de bloquear) \\\
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
-import { VRMLoaderPlugin, VRMUtils } from 'https://cdn.jsdelivr.net/npm/@pixiv/three-vrm@3.0.0/lib/three-vrm.module.js';
-
-const _initAvatar3D = () => {
-  const _vrmContainer = document.getElementById('vrm-container');
-  const _panelDescargas = document.getElementById('panel-descargas');
-  const _btnDescargar = document.getElementById('btnDescargarModelo');
-  const _barraFondo = document.getElementById('barra-progreso-3d');
-  const _barraFill = document.getElementById('progreso-fill');
-  const _textoProgreso = document.getElementById('texto-progreso');
-  const _textoAvatar = document.getElementById('texto-avatar');
-
-  // /// 2. HACER QUE LAS PESTAÑAS REACCIONEN \\\
+document.addEventListener('DOMContentLoaded', () => {
+  
+  // /// 1. HACER QUE LAS PESTAÑAS REACCIONEN \\\
   const _pestañas = document.querySelectorAll('.tab-descarga');
   _pestañas.forEach(_tab => {
     _tab.addEventListener('click', () => {
-      if (_tab.textContent === 'Modelos') return; // Si ya estamos en Modelos, no hacer nada
+      if (_tab.textContent === 'Modelos') return;
       alert("La sección " + _tab.textContent + " estará disponible en la próxima actualización.");
     });
   });
 
+  const _btnDescargar = document.getElementById('btnDescargarModelo');
   if (!_btnDescargar) return;
 
-  // /// 3. LÓGICA DE DESCARGA \\\
-  _btnDescargar.addEventListener('click', () => {
-    _btnDescargar.style.display = 'none';
-    _barraFondo.style.display = 'block';
-    _textoProgreso.style.display = 'block';
-    _textoProgreso.textContent = "Conectando...";
+  // /// 2. LÓGICA DE DESCARGA CON CARGA DINÁMICA \\\
+  _btnDescargar.addEventListener('click', async () => {
+    
+    // Cambiamos el color para saber que el clic funcionó
+    _btnDescargar.style.background = "var(--magenta)";
+    alert("Botón presionado. Iniciando descarga de librerías 3D... (Espera)");
 
     try {
+      // Cargamos las librerías EN EL MOMENTO usando esm.sh (otro CDN)
+      const THREE = await import('https://esm.sh/three@0.160.0');
+      const { GLTFLoader } = await import('https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js');
+      const { VRMLoaderPlugin, VRMUtils } = await import('https://esm.sh/@pixiv/three-vrm@3.0.0');
+
+      const _vrmContainer = document.getElementById('vrm-container');
+      const _panelDescargas = document.getElementById('panel-descargas');
+      const _barraFondo = document.getElementById('barra-progreso-3d');
+      const _barraFill = document.getElementById('progreso-fill');
+      const _textoProgreso = document.getElementById('texto-progreso');
+      const _textoAvatar = document.getElementById('texto-avatar');
+
+      _btnDescargar.style.display = 'none';
+      _barraFondo.style.display = 'block';
+      _textoProgreso.style.display = 'block';
+      _textoProgreso.textContent = "Descargando modelo...";
+
       const _scene = new THREE.Scene();
       const _camera = new THREE.PerspectiveCamera(30, _vrmContainer.clientWidth / _vrmContainer.clientHeight, 0.1, 20);
       _camera.position.set(0, 1.3, 2.5);
@@ -47,7 +53,6 @@ const _initAvatar3D = () => {
       _loader.load(
         _path, 
         (gltf) => {
-          // ÉXITO: Ocultamos el panel y mostramos a Alexander
           _panelDescargas.style.display = 'none';
           _textoAvatar.style.display = 'block';
           
@@ -61,7 +66,6 @@ const _initAvatar3D = () => {
           _vrm.scene.rotation.y = Math.PI; 
           _scene.add(_vrm.scene);
 
-          // Luces neón
           const _ambient = new THREE.AmbientLight(0xffffff, 0.6);
           _scene.add(_ambient);
           const _lightCyan = new THREE.DirectionalLight(0x00f5ff, 2);
@@ -84,7 +88,6 @@ const _initAvatar3D = () => {
           _animate();
         },
         (xhr) => {
-          // Actualizar barra de progreso
           if (xhr.total > 0) {
             const _porcentaje = Math.round((xhr.loaded / xhr.total) * 100);
             _barraFill.style.width = _porcentaje + '%';
@@ -92,28 +95,16 @@ const _initAvatar3D = () => {
           }
         },
         (error) => {
-          // Error al descargar el archivo .vrm
           console.error('Error al cargar el VRM:', error);
-          _textoProgreso.textContent = "Error al descargar";
-          _textoProgreso.style.color = "var(--magenta)";
-          alert("Fallo al descargar el modelo. El archivo está ahí, pero la red cortó la descarga.");
+          alert("La red cortó la descarga del modelo de Alexander.");
         }
       );
-
-      window.addEventListener('resize', () => {
-        _camera.aspect = _vrmContainer.clientWidth / _vrmContainer.clientHeight;
-        _camera.updateProjectionMatrix();
-        _renderer.setSize(_vrmContainer.clientWidth, _vrmContainer.clientHeight);
-      });
-
     } catch (error) {
-      // Error si las librerías de Three.js no cargan de internet
-      console.error('Error crítico 3D:', error);
-      _textoProgreso.textContent = "Error del motor 3D";
-      _textoProgreso.style.color = "var(--magenta)";
-      alert("Tu red o navegador sigue bloqueando las librerías 3D (jsDelivr). Intenta con otra red WiFi.");
+      // SI EL CDN ESTÁ BLOQUEADO, SALTARÁ ESTO
+      console.error("Error al cargar librerías:", error);
+      alert("🚨 ERROR: Tu red está bloqueando las librerías 3D de internet. Intenta con otro WiFi o datos móviles.");
+      _btnDescargar.style.display = 'block';
+      _btnDescargar.style.background = "";
     }
   });
-};
-
-document.addEventListener('DOMContentLoaded', _initAvatar3D);
+});
