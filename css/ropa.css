@@ -17,17 +17,27 @@
 body { font-family: 'Rajdhani', sans-serif; background: var(--bg-dark); color: var(--texto); line-height: 1.6; overflow-x: hidden; }
 body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; z-index: 0; }
 
-/* /// 3. HEADER Y NAVEGACIÓN \\\ */
+/* /// 3. HEADER Y MENÚ HAMBURGUESA \\\ */
 .header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(10, 10, 18, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--borde); }
-.logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.4rem; letter-spacing: 2px; text-decoration: none; }
-.logo-yami { color: var(--texto); }
-.logo-code { color: var(--cian); text-shadow: var(--glow); }
+.logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.4rem; letter-spacing: 2px; text-decoration: none; display: flex; align-items: center;}
+.logo-yami { color: var(--texto); text-shadow: 1px 1px 0 #000, 2px 2px 0 var(--cian); }
+.logo-code { color: var(--cian); text-shadow: 1px 1px 0 #000, 2px 2px 0 var(--violeta); }
+
+/* BOTÓN HAMBURGUESA (CSS PURO) */
+.menu-toggle { display: none; flex-direction: column; justify-content: space-around; width: 35px; height: 30px; background: transparent; border: none; cursor: pointer; z-index: 102; }
+.menu-toggle span { width: 100%; height: 3px; background: var(--cian); border-radius: 3px; transition: all 0.3s ease; box-shadow: 0 0 5px var(--cian); }
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 7px); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -8px); }
+
+/* MENÚ DESPLEGABLE */
 .nav { display: flex; gap: 1.5rem; align-items: center; }
-.nav a { color: var(--texto-dim); text-decoration: none; font-weight: 600; transition: color 0.2s; }
-.nav a:hover, .nav a.active { color: var(--cian); }
-.btn-nav { padding: 0.4rem 1rem; border: 1px solid var(--cian); border-radius: 6px; color: var(--cian) !important; }
-.btn-nav:hover { background: var(--cian); color: var(--bg-dark) !important; }
-.menu-toggle { display: none; background: none; border: none; color: var(--cian); font-size: 1.5rem; cursor: pointer; }
+.nav a { color: var(--texto); text-decoration: none; font-weight: 600; transition: color 0.2s; }
+.nav a:hover { color: var(--cian); }
+
+.nav-title { display: none; } /* Oculto en escritorio */
+.nav-divider { display: none; }
+.nav-btn { display: none; } /* Oculto en escritorio */
 
 /* /// 4. HERO E INICIO \\\ */
 .hero { position: relative; z-index: 1; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; padding: 5rem 2rem; max-width: 1200px; margin: 0 auto; min-height: 80vh; }
@@ -62,7 +72,7 @@ body::before { content: ''; position: fixed; inset: 0; background-image: linear-
 
 /* /// 7. AVATAR Y LOGIN \\\ */
 .hero-avatar { display: flex; justify-content: center; position: relative; }
-.avatar-box { width: 260px; height: 320px; background: linear-gradient(160deg, var(--bg-card), var(--bg-mid)); border: 1px solid var(--borde); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--glow); }
+.avatar-box { width: 320px; height: 420px; background: linear-gradient(160deg, var(--bg-card), var(--bg-mid)); border: 1px solid var(--borde); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--glow); }
 .avatar-face { font-size: 3rem; font-family: 'Orbitron', sans-serif; color: var(--cian); }
 .avatar-name { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: var(--cian); margin-top: 0.5rem; }
 .login-container { max-width: 400px; margin: 80px auto; padding: 2rem; background: rgba(26, 26, 46, 0.6); border: 1px solid var(--cian); border-radius: 16px; backdrop-filter: blur(10px); box-shadow: 0 0 20px rgba(0, 245, 255, 0.1); text-align: center; }
@@ -89,138 +99,46 @@ body::before { content: ''; position: fixed; inset: 0; background-image: linear-
 .error { display: block; background: rgba(255, 46, 151, 0.1); color: var(--magenta); border: 1px solid var(--magenta); }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-/* /// 9. MODO EXAMEN Y FOOTER \\\ */
-body.en-examen { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
-body.en-examen input, body.en-examen textarea { -webkit-user-select: text; user-select: text; }
-.footer { position: relative; z-index: 1; text-align: center; padding: 2.5rem 1rem; border-top: 1px solid var(--borde); color: var(--texto-dim); }
-.footer-logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.2rem; margin-bottom: 0.8rem; }
-
-/* /// 10. RESPONSIVE (CELULARES) \\\ */
-@media (max-width: 768px) {
-  .header { padding: 0.8rem 1rem; }
-  .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--bg-mid); padding: 1rem; border-bottom: 1px solid var(--borde); }
-  .nav.active { display: flex; }
-  .menu-toggle { display: block; }
-  .hero { grid-template-columns: 1fr; text-align: center; padding: 3rem 1.2rem; }
-  .hero-btns { justify-content: center; }
-}
-
-/* /// 11. MENÚ 3D Y MODALES (ESTILO CONSOLA) \\\ */
-.logo-yami, .logo-code {
-  display: inline-block;
-  text-shadow: 1px 1px 0 #000, 2px 2px 0 #000, 3px 3px 0 var(--cian);
-  transform: perspective(100px) rotateX(10deg);
-}
-
-.menu-toggle {
-  background: rgba(0, 245, 255, 0.1);
-  border: 1px solid var(--cian);
-  color: var(--cian);
-  padding: 5px 15px;
-  border-radius: 6px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
-  transition: 0.3s;
-}
-
-.menu-toggle:hover {
-  background: var(--cian);
-  color: var(--bg-dark);
-  box-shadow: 0 0 20px rgba(0, 245, 255, 0.8);
-}
-
-/* El menú desplegable */
-.nav {
-  position: absolute;
-  top: 100%;
-  right: 2rem;
-  width: 250px;
-  background: rgba(10, 10, 18, 0.95);
-  backdrop-filter: blur(15px);
-  border: 1px solid var(--cian);
-  border-top: none;
-  border-radius: 0 0 12px 12px;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 15px;
-  display: none; /* Oculto por defecto */
-  box-shadow: 0 10px 30px rgba(0, 245, 255, 0.15);
-  transform-origin: top right;
-  animation: menuOpen 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-@keyframes menuOpen {
-  from { opacity: 0; transform: scaleY(0.5); }
-  to { opacity: 1; transform: scaleY(1); }
-}
-
-.nav.active {
-  display: flex; /* Se muestra cuando el JS lo activa */
-}
-
-.nav-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.7rem;
-  color: var(--texto-dim);
-  letter-spacing: 2px;
-  margin-bottom: 5px;
-  margin-top: 10px;
-  text-transform: uppercase;
-}
-
-.nav a, .nav-btn {
-  color: var(--texto);
-  text-decoration: none;
-  font-weight: 600;
-  padding: 10px;
-  border-radius: 6px;
-  transition: 0.2s;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.nav-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 1rem;
-  width: 100%;
-}
-
-.nav a:hover, .nav-btn:hover {
-  background: rgba(0, 245, 255, 0.1);
-  color: var(--cian);
-  padding-left: 15px; /* Efecto de desplazamiento */
-}
-
-.nav-divider {
-  height: 1px;
-  background: var(--borde);
-  margin: 10px 0;
-}
-
-/* Estilos de los Modales (Ventanas) */
+/* /// 9. MODALES Y MENÚ MÓVIL \\\ */
 .modal-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(5px);
-  z-index: 10000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
+  z-index: 10000; display: flex; justify-content: center; align-items: center;
   animation: fadeIn 0.3s ease;
 }
-
-.modal-box {
-  padding: 20px;
-  border-radius: 12px;
-  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
+.modal-box { padding: 20px; border-radius: 12px; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes popIn { from { transform: scale(0.8); } to { transform: scale(1); } }
+
+/* /// 10. RESPONSIVE (EL ARREGLO DEL MENÚ) \\\ */
+@media (max-width: 768px) {
+  .menu-toggle { display: flex; }
+  
+  .nav {
+    display: flex; flex-direction: column; align-items: stretch;
+    position: absolute; top: 100%; left: 0; width: 100%;
+    background: rgba(10, 10, 18, 0.98); backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--cian); padding: 10px 20px 20px;
+    transform: scaleY(0); transform-origin: top; transition: transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 245, 255, 0.15);
+    z-index: 101;
+  }
+  .nav.active { transform: scaleY(1); }
+  
+  .nav a { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .nav a:last-child { border-bottom: none; }
+  
+  .nav-title { display: block; font-family: 'Orbitron'; font-size: 0.7rem; color: var(--texto-dim); margin-top: 15px; margin-bottom: 5px; letter-spacing: 2px; }
+  .nav-divider { display: block; height: 1px; background: var(--borde); margin: 10px 0; }
+  
+  .nav-btn {
+    display: flex; align-items: center; gap: 10px;
+    background: transparent; border: none; color: var(--texto);
+    padding: 12px 0; font-family: 'Rajdhani'; font-size: 1.1rem; font-weight: 600; cursor: pointer;
+  }
+  .nav-btn:hover { color: var(--cian); }
+  
+  .hero { grid-template-columns: 1fr; text-align: center; padding: 3rem 1.2rem; }
+  .hero-btns { justify-content: center; }
+  .avatar-box { margin: 0 auto; }
+}
