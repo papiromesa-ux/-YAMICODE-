@@ -127,13 +127,22 @@
     </section>
   </main>
 
-  <!-- /// 5. FOOTER \\\ -->
+    <!-- /// 5. FOOTER \\\ -->
   <footer class="footer">
     <div class="footer-logo"><span class="logo-yami">YAMI</span><span class="logo-code">CODE</span></div>
     <p>PAPIROMESA-UX RELEASE 1 YAMICODE.</p>
   </footer>
   
-  <!-- /// 6. SCRIPTS \\\ -->
+  <!-- /// 6. SCRIPTS Y MAPA DE RUTAS (Para el 3D local) \\\ -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./js/libs/three.module.js",
+        "three/addons/": "./js/libs/addons/"
+      }
+    }
+  </script>
+  
   <script src="js/cerebro.js"></script>
   <script type="module" src="js/sys_index.js"></script>
   <script type="module" src="js/sys_3d.js"></script>
