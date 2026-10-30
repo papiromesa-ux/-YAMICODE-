@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     } catch (error) {
       console.error("Error crítico:", error);
-      alert("🚨 No se pudo descargar el modelo. Revisa tu conexión.");
+      alert(" No se pudo descargar el modelo. Revisa tu conexión.");
     }
   };
 
