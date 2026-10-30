@@ -26,7 +26,7 @@ onAuthStateChanged(_secAuth, (_sysUser) => {
       _mod2.style.borderLeft = "4px solid var(--cian)"; 
       
       const _bdg = _mod2.querySelector(".card-badge");
-      _badge.textContent = "Módulo 02";
+      _bdg.textContent = "Módulo 02";
       _bdg.style.background = "rgba(0, 245, 255, 0.2)";
       _bdg.style.color = "var(--texto)";
 
