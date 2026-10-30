@@ -8,17 +8,37 @@
   <link rel="stylesheet" href="../css/ropa.css">
 </head>
 <body>
+  
   <header class="header">
-    <a href="../index.html" class="logo"><span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span></a>
-    <nav class="nav" id="nav">
-      <a href="../index.html">Inicio</a>
-      <a href="aula.html">Aulas</a>
-      <a href="labs.html">Especialidades</a>
-      <a href="juegos.html">Juegos</a>
-      <a href="perfil.html" class="btn-nav">Mi Perfil</a>
-    </nav>
-    <button class="menu-toggle" id="menuToggle">[=]</button>
-  </header>
+  <a href="../index.html" class="logo">
+    <span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span>
+  </a>
+  
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav class="nav" id="nav">
+    <div class="nav-title">SISTEMA</div>
+    <a href="../index.html">Inicio</a>
+    <a href="aula.html">Desarrollo Web</a>
+    <a href="apps.html">Creación de Aplicaciones</a>
+    <a href="labs.html">Especialidades</a>
+    <a href="juegos.html">Juegos</a>
+    
+    <div class="nav-divider"></div>
+    
+    <div class="nav-title">HERRAMIENTAS</div>
+    <a href="../index.html#descargas">Descargas</a>
+    <a href="../index.html#reportes">Reportes</a>
+
+    <div class="nav-divider"></div>
+    
+    <a href="login.html" class="btn-nav" style="text-align: center; margin-top: 10px; border: 1px solid var(--cian); padding: 8px; border-radius: 6px; color: var(--cian) !important;">Iniciar Sesión</a>
+  </nav>
+</header>
 
   <main>
     <header class="page-header">
