@@ -1,14 +1,10 @@
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { VRMLoaderPlugin, VRMUtils } from './libs/three-vrm.module.js';
-
 document.addEventListener('DOMContentLoaded', () => {
   
   const _pestañas = document.querySelectorAll('.tab-descarga');
   _pestañas.forEach(_tab => {
     _tab.addEventListener('click', () => {
       if (_tab.textContent === 'Modelos') return;
-      alert("La sección " + _tab.textContent + " estará disponible en la próxima actualización.");
+      alert("La sección " + _tab.textContent + " estará disponible pronto.");
     });
   });
 
@@ -26,18 +22,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     _barraFondo.style.display = 'block';
     _textoProgreso.style.display = 'block';
-    _textoProgreso.textContent = "Descargando Alexander...";
+    _textoProgreso.textContent = "Iniciando...";
 
     try {
-      // Usamos fetch para descargar el archivo del modelo
-      const _path = 'Modelos/Modelos%20de%20preterminado/alexander.vrm';
-      const response = await fetch(_path);
-      if (!response.ok) throw new Error("Error de red al descargar VRM");
+      // 1. PROBAMOS CARGAR THREE.JS LOCAL
+      _textoProgreso.textContent = "Cargando motor 3D...";
+      const THREE = await import('./libs/three.module.js');
       
+      // 2. PROBAMOS CARGAR EL CARGADOR GLTF
+      _textoProgreso.textContent = "Cargando GLTFLoader...";
+      const { GLTFLoader } = await import('./libs/addons/loaders/GLTFLoader.js');
+      
+      // 3. PROBAMOS CARGAR EL SOPORTE VRM
+      _textoProgreso.textContent = "Cargando VRM...";
+      const { VRMLoaderPlugin, VRMUtils } = await import('./libs/three-vrm.module.js');
+
+      _textoProgreso.textContent = "Descargando modelo .vrm...";
+
+      // 4. DESCARGAMOS EL MODELO
+      const response = await fetch('Modelos/Modelos%20de%20preterminado/alexander.vrm');
+      if (!response.ok) throw new Error("No se encontró el archivo .vrm");
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
 
-      // Configuramos la escena 3D
+      // 5. CONFIGURAMOS LA ESCENA
       const _scene = new THREE.Scene();
       const _camera = new THREE.PerspectiveCamera(30, _vrmContainer.clientWidth / _vrmContainer.clientHeight, 0.1, 20);
       _camera.position.set(0, 1.3, 2.5);
@@ -53,10 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
         (gltf) => {
           _panelDescargas.style.display = 'none';
           _textoAvatar.style.display = 'block';
-          
           _vrmContainer.innerHTML = '';
           
-          // Delay para asegurar que el contenedor tenga su tamaño
           setTimeout(() => {
             _renderer.setSize(_vrmContainer.clientWidth, _vrmContainer.clientHeight);
             _vrmContainer.appendChild(_renderer.domElement);
@@ -68,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
             _vrm.scene.rotation.y = Math.PI; 
             _scene.add(_vrm.scene);
 
-            // Luces Neón
             const _ambient = new THREE.AmbientLight(0xffffff, 0.8);
             _scene.add(_ambient);
             const _lightCyan = new THREE.DirectionalLight(0x00f5ff, 2);
@@ -89,26 +94,19 @@ document.addEventListener('DOMContentLoaded', () => {
               _renderer.render(_scene, _camera);
             };
             _animate();
-
-            window.addEventListener('resize', () => {
-              _camera.aspect = _vrmContainer.clientWidth / _vrmContainer.clientHeight;
-              _camera.updateProjectionMatrix();
-              _renderer.setSize(_vrmContainer.clientWidth, _vrmContainer.clientHeight);
-            });
           }, 100);
         },
         undefined,
         (error) => {
-          console.error('Error al cargar el VRM:', error);
-          _textoProgreso.textContent = "Error al dibujar";
-          _textoProgreso.style.color = "var(--magenta)";
+          alert("El archivo 3D se descargó pero falló al dibujarse. Puede que esté dañado.");
         }
       );
     } catch (error) {
-      console.error("Error al descargar:", error);
-      _textoProgreso.textContent = "Error de red";
-      _textoProgreso.style.color = "var(--magenta)";
-      alert("No se pudo conectar con el modelo.");
+      // ESTO NOS DIRÁ EL ERROR EXACTO
+      console.error("Error detectado:", error);
+      alert("🚨 FALLO EN: " + error.message + "\n\nRevisa que los archivos estén en la carpeta js/libs y que NO estén traducidos al español.");
+      _textoProgreso.textContent = "Error";
+      _btnDescargar.style.display = 'block';
     }
   });
 });
