@@ -1,3 +1,4 @@
+// 1. Primero intentamos importar las librerías. Si esto falla, el botón no hará nada.
 import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
 import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
 import { VRMLoaderPlugin, VRMUtils } from 'https://unpkg.com/@pixiv/three-vrm@3.0.0/lib/three-vrm.module.js';
@@ -11,13 +12,20 @@ const _initAvatar3D = () => {
   const _textoProgreso = document.getElementById('texto-progreso');
   const _textoAvatar = document.getElementById('texto-avatar');
 
-  if (!_btnDescargar) return;
+  if (!_btnDescargar) {
+    alert("Error grave: No se encontró el botón de descarga en el HTML.");
+    return;
+  }
 
   _btnDescargar.addEventListener('click', () => {
-    // 1. Desaparecemos el botón y mostramos la barra
+    // PRUEBA DE VIDA: Cambiamos el color del botón para saber si el clic funciona
+    _btnDescargar.style.background = "var(--magenta)"; 
+    
+    // Ocultamos el botón y mostramos la barra
     _btnDescargar.style.display = 'none';
     _barraFondo.style.display = 'block';
     _textoProgreso.style.display = 'block';
+    _textoProgreso.textContent = "Iniciando motor 3D...";
 
     try {
       const _scene = new THREE.Scene();
@@ -36,7 +44,7 @@ const _initAvatar3D = () => {
       _loader.load(
         _path, 
         (gltf) => {
-          // 2. Cuando termina, ocultamos el panel y mostramos el 3D
+          // Si llega aquí, el modelo cargó
           _panelDescargas.style.display = 'none';
           _textoAvatar.style.display = 'block';
           
@@ -72,22 +80,21 @@ const _initAvatar3D = () => {
           _animate();
         },
         (xhr) => {
-          // 3. Actualizamos la barra de progreso
+          // Barra de progreso
           if (xhr.total > 0) {
             const _porcentaje = Math.round((xhr.loaded / xhr.total) * 100);
             _barraFill.style.width = _porcentaje + '%';
             _textoProgreso.textContent = _porcentaje + '%';
           } else {
-            // Si no hay total (a veces pasa en GitHub), mostramos los MB descargados
             _textoProgreso.textContent = Math.round(xhr.loaded / 1048576) + " MB...";
           }
         },
         (error) => {
-          // 4. SI HAY UN ERROR, LO MOSTRAMOS EN PANTALLA PARA SABER QUÉ PASA
+          // SI FALLA LA DESCARGA
           console.error('Error al cargar el VRM:', error);
-          _textoProgreso.textContent = "Error de descarga";
+          _textoProgreso.textContent = "Error al descargar";
           _textoProgreso.style.color = "var(--magenta)";
-          alert("Error técnico: No se pudo descargar el modelo 3D. Revisa tu conexión a internet o si el archivo está dañado.");
+          alert("No se pudo descargar el modelo. Revisa tu conexión.");
         }
       );
 
@@ -98,10 +105,18 @@ const _initAvatar3D = () => {
       });
 
     } catch (error) {
+      // SI FALLA EL MOTOR 3D (WEBGL)
       console.error('Error crítico 3D:', error);
-      alert("Fallo del sistema: Las librerías 3D no pudieron cargar. Es posible que tu red las esté bloqueando.");
+      _textoProgreso.textContent = "Fallo del sistema 3D";
+      _textoProgreso.style.color = "var(--magenta)";
+      alert("Tu navegador o red bloquearon las librerías 3D (Three.js). Intenta con otro navegador o red WiFi.");
     }
   });
 };
 
-document.addEventListener('DOMContentLoaded', _initAvatar3D);
+// Nos aseguramos de que el script corra solo cuando el HTML esté listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', _initAvatar3D);
+} else {
+  _initAvatar3D();
+}
