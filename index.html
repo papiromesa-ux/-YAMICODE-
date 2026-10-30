@@ -9,19 +9,24 @@
 </head>
 <body>
 
-  <!-- /// 1. HEADER (Solo Logo y Botón de Menú) \\\ -->
+  <!-- /// 1. HEADER (Menú Hamburguesa CSS) \\\ -->
   <header class="header">
     <a href="index.html" class="logo">
       <span class="logo-yami">&lt;YAMI</span><span class="logo-code">CODE&gt;</span>
     </a>
     
-    <button class="menu-toggle" id="menuToggle">[=]</button>
+    <!-- Botón con las 3 líneas CSS -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <!-- EL MENÚ DESPLEGABLE (Con todo adentro) -->
     <nav class="nav" id="nav">
       <div class="nav-title">SISTEMA</div>
       <a href="index.html">Inicio</a>
-      <a href="pages/aula.html">Programas</a>
+      <a href="pages/aula.html">Desarrollo Web</a>
+      <a href="pages/apps.html">Creación de Aplicaciones</a>
       <a href="pages/labs.html">Especialidades</a>
       <a href="pages/juegos.html">Juegos</a>
       
@@ -39,7 +44,7 @@
 
       <div class="nav-divider"></div>
       
-      <a href="pages/login.html" class="btn-nav" style="text-align: center; margin-top: 10px;">Iniciar Sesión</a>
+      <a href="pages/login.html" class="btn-nav" style="text-align: center; margin-top: 10px; border: 1px solid var(--cian); padding: 8px; border-radius: 6px; color: var(--cian) !important;">Iniciar Sesión</a>
     </nav>
   </header>
 
@@ -62,7 +67,7 @@
       <!-- /// 3. CAJA DEL AVATAR 3D \\\ -->
       <div class="hero-avatar">
         <div class="avatar-glow"></div>
-        <div class="avatar-box" id="avatarBox" style="position: relative; overflow: hidden; padding: 0; width: 320px; height: 420px;">
+        <div class="avatar-box" id="avatarBox">
           
           <div id="vrm-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1;"></div>
           
@@ -75,7 +80,7 @@
       </div>
     </section>
 
-    <!-- /// 4. RUTAS DE APRENDIZAJE \\\ -->
+    <!-- /// 4. RUTAS DE APRENDIZAJE (Textos actualizados) \\\ -->
     <section class="section">
       <h2 class="section-title">&lt;Selecciona tu&gt;<span class="neon">Ruta</span></h2>
       <p class="section-sub">&lt;No te satures. Elige un área y enfócate en dominarla&gt;</p>
@@ -83,22 +88,22 @@
       <div class="grid-3">
         <a href="pages/aula.html" class="card card-course" style="text-align: center;">
           <div class="card-badge">Academia</div>
-          <img src="assets/img/pw.png" alt="Programación Web" class="card-img">
-          <h3>Programas Web</h3>
+          <img src="assets/img/pw.png" alt="Desarrollo Web" class="card-img">
+          <h3>Desarrollo Web</h3>
           <p>Aprende lenguajes de programación para la web y software como JavaScript, Python, C++, entre otros.</p>
           <span class="card-link">Entrar al aula -></span>
         </a>
 
         <a href="pages/apps.html" class="card card-course" style="text-align: center;">
           <div class="card-badge">Academia</div>
-          <img src="assets/img/pm.png" alt="Programación Móvil" class="card-img">
-          <h3>creación de apps</h3>
+          <img src="assets/img/pm.png" alt="Creación de Aplicaciones" class="card-img">
+          <h3>Creación de Aplicaciones</h3>
           <p>Desarrollo para Android, iOS y Windows. Aprende sobre APKs, EXEs y tiendas de distribución.</p>
           <span class="card-link">Entrar al aula -></span>
         </a>
 
         <a href="pages/labs.html" class="card card-course" style="text-align: center;">
-          <div class="card-badge">especialisados</div>
+          <div class="card-badge">Especialidades</div>
           <img src="assets/img/es.png" alt="Especialidades" class="card-img">
           <h3>Especialidades</h3>
           <p>Ciberseguridad, Hackodeo, Gamercraft y creación de Software Móvil o de Computadora.</p>
@@ -108,8 +113,8 @@
     </section>
   </main>
 
-  <!-- /// 5. MENÚ LATERAL DE DESCARGAS (Se abre desde el menú) \\\ -->
-  <div id="modal-descargas" class="modal-overlay" style="display: none; justify-content: flex-end; align-items: flex-start; padding-top: 80px; padding-right: 20px;">
+  <!-- /// 5. MODAL DE DESCARGAS \\\ -->
+  <div id="modal-descargas" class="modal-overlay" style="display: none;">
     <div class="modal-box" style="width: 350px; background: #0a0a12; border: 1px solid var(--cian); box-shadow: 0 0 30px rgba(0, 245, 255, 0.2);">
       
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -124,7 +129,6 @@
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 10px;">
-        <!-- Alexander -->
         <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
           <div style="text-align: left;">
             <p style="color: var(--texto); font-weight: bold; font-size: 0.9rem; margin: 0;">Alexander.vrm</p>
@@ -140,7 +144,6 @@
           </div>
         </div>
 
-        <!-- Andrea -->
         <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
           <div style="text-align: left;">
             <p style="color: var(--texto); font-weight: bold; font-size: 0.9rem; margin: 0;">Andrea.vrm</p>
@@ -157,7 +160,6 @@
         </div>
       </div>
 
-      <!-- Barra de progreso -->
       <div id="barra-progreso-3d" style="display: none; width: 100%; height: 6px; background: #000; border-radius: 3px; margin-top: 15px; border: 1px solid var(--borde); overflow: hidden;">
         <div id="progreso-fill" style="width: 0%; height: 100%; background: var(--cian); transition: width 0.2s;"></div>
       </div>
@@ -165,18 +167,18 @@
     </div>
   </div>
 
-  <!-- /// 6. MODAL DE REPORTES \\\ -->
+  <!-- /// 6. MODAL DE REPORTES (Con envío a WhatsApp) \\\ -->
   <div id="modal-reportes" class="modal-overlay" style="display: none; z-index: 10005;">
     <div class="modal-box" style="max-width: 400px; background: #0a0a12; border: 1px solid var(--magenta); box-shadow: 0 0 30px rgba(255, 46, 151, 0.2);">
       <h3 style="color: var(--magenta); margin-top: 0; font-family: 'Orbitron', sans-serif;">Reportar un Error</h3>
-      <p style="color: var(--texto-dim); font-size: 0.9rem;">Si encontraste un fallo, tienes una recomendación o necesitas ayuda, contáctanos:</p>
+      <p style="color: var(--texto-dim); font-size: 0.9rem;">Escribe tu reporte y se enviará directo a nuestro WhatsApp.</p>
       
-      <div style="background: rgba(255,46,151,0.1); border: 1px solid var(--magenta); padding: 15px; border-radius: 8px; text-align: center; margin: 20px 0;">
-        <p style="margin: 0; font-size: 0.8rem; color: var(--texto-dim);">Llámanos o envía un mensaje al:</p>
-        <p style="margin: 5px 0 0 0; font-size: 1.5rem; font-weight: bold; color: var(--magenta);">+503 6840 5099</p>
-      </div>
+      <textarea id="txtReporte" placeholder="Describe el error o recomendación aquí..." style="width: 100%; height: 100px; background: #000; border: 1px solid var(--borde); color: var(--texto); border-radius: 8px; padding: 10px; margin: 15px 0; resize: none; font-family: 'Rajdhani';"></textarea>
 
-      <button id="btnCerrarReportes" class="btn btn-primary" style="width: 100%;">Cerrar</button>
+      <div style="display: flex; gap: 10px;">
+        <button id="btnCerrarReportes" class="btn btn-ghost" style="flex: 1;">Cancelar</button>
+        <button id="btnEnviarWhatsApp" class="btn btn-primary" style="flex: 2; background: #25D366; color: #000;">Enviar a WhatsApp</button>
+      </div>
     </div>
   </div>
 
