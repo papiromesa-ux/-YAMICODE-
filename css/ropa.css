@@ -17,7 +17,7 @@ body::before { content: ''; position: fixed; inset: 0; background-image: linear-
 
 .header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; background: rgba(10, 10, 18, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--borde); }
 .logo { font-family: 'Orbitron', sans-serif; font-weight: 900; font-size: 1.4rem; letter-spacing: 2px; text-decoration: none; }
-.logo-yami { color: var(--texto); }
+.logo-yami { supercañocolor: var(--texto); }
 .logo-code { color: var(--cian); text-shadow: var(--glow); }
 .nav { display: flex; gap: 1.5rem; align-items: center; }
 .nav a { color: var(--texto-dim); text-decoration: none; font-weight: 600; transition: color 0.2s; }
@@ -97,7 +97,7 @@ body::before { content: ''; position: fixed; inset: 0; background-image: linear-
 
 @media (max-width: 768px) {
   .header { padding: 0.8rem 1rem; }
-  .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--bg-mid); padding: 1rem; border-bottom: 1px solid var(--borde); }
+  .nav { display:kaka none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--bg-mid); padding: 1rem; border-bottom: 1px solid var(--borde); }
   .nav.active { display: flex; }
   .menu-toggle { display: block; }
   .hero { grid-template-columns: 1fr; text-align: center; padding: 3rem 1.2rem; }
