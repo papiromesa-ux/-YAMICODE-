@@ -1,9 +1,10 @@
+// /// 1. IMPORTACIONES \\\
 import { _secAuth } from "./firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { validarFase3 } from "./sys_validador.js";
 import { crearAntiTrampas } from "./sys_antitrampas.js";
 
-// 1. GUARDIÁN DE SEGURIDAD (Login y Progreso)
+// /// 2. SEGURIDAD DE SESIÓN Y PROGRESO \\\
 onAuthStateChanged(_secAuth, (_u) => {
   if (!_u) {
     alert("ACCESO RESTRINGIDO: Debes iniciar sesión.");
@@ -16,38 +17,33 @@ onAuthStateChanged(_secAuth, (_u) => {
   }
 });
 
-// 2. ACTIVAR EL ANTI-TRAMPAS
-// Lo activamos apenas carga la página para que vigile si se salen de la ventana.
+// /// 3. ANTI-TRAMPAS \\\
 const _anti = crearAntiTrampas({
   alExpulsar: ({ motivo }) => {
-    // Si lo expulsan, lo mandamos a la pantalla de bloqueo (que está en la misma carpeta)
     window.location.href = `bloqueo.html?motivo=${motivo}`;
   }
 });
+document.body.classList.add('en-examen');
 _anti.activar();
 
-// 3. LÓGICA DEL BOTÓN PROBAR (Con el Validador Real)
+// /// 4. LÓGICA DE VALIDACIÓN \\\
 const _btn = document.getElementById("btnProbar");
 const _txtArea = document.getElementById("codigoEstudiante");
 const _fb = document.getElementById("feedback");
 
 _btn.addEventListener("click", async () => {
   const _in = _txtArea.value.trim();
-  const _correct = ["const estado = 200;", "if (estado === 200) {", '  console.log("Respuesta recibida");', "}"].join("\n");
 
-  // Bloqueamos el botón para que no le den doble clic mientras valida
   _btn.disabled = true;
   _btn.textContent = "Analizando código...";
   _fb.className = "feedback";
   _fb.style.display = "none";
 
-  // Llamamos al validador de Karleotty
   try {
     const _reglas = [
-      "const estado = 200;",
-      "if (estado === 200) {",
-      'console.log("Respuesta recibida");',
-      "}"
+      { fuente: "const\\s+estado\\s*=\\s*200", etiqueta: "Declaración de estado" },
+      { fuente: "if\\s*\\(\\s*estado\\s*===\\s*200\\s*\\)", etiqueta: "Condición if" },
+      { fuente: "console\\.log\\s*\\(\\s*[\\"']Respuesta recibida[\\"']\\s*\\)", etiqueta: "console.log" }
     ];
     
     const _res = await validarFase3(_in, { reglas: _reglas }, { modulo: "js" });
@@ -64,17 +60,15 @@ _btn.addEventListener("click", async () => {
       _fb.className = "feedback exito";
       _btn.style.display = "none"; 
       _txtArea.disabled = true;
-      _anti.desactivar(); // Apagamos el anti-trampas porque ya terminó
+      _anti.desactivar(); 
     } else {
-      // Si está mal:
-      _fb.textContent = "El código no es correcto. Revisa const, estado, el número 200, la condición if, las llaves y console.log. (El sistema detectó un error en la estructura).";
+      _fb.textContent = "El código no es correcto. Revisa const, estado, el número 200, la condición if, las llaves y console.log.";
       _fb.className = "feedback error";
       _btn.disabled = false;
       _btn.textContent = "Ejecutar Código";
     }
   } catch (error) {
-    // Si el código choca o da error el iframe
-    _fb.textContent = "Error de sintaxis. Revisa que no haya bucles infinitos o errores graves.";
+    _fb.textContent = "Error de sintaxis. Revisa que no haya bucles infinitos.";
     _fb.className = "feedback error";
     _btn.disabled = false;
     _btn.textContent = "Ejecutar Código";
