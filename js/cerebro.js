@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // /// 1. LÓGICA DEL MENÚ HAMBURGUESA \\\
   const _nav = document.getElementById('nav');
   const _menuToggle = document.getElementById('menuToggle');
 
@@ -9,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Cerrar menú al hacer clic en un enlace
   if (_nav) {
     _nav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
@@ -18,9 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-});
 
-
+  // /// 2. LÓGICA DE INTERACCIÓN CON EL AVATAR \\\
   const _uiAvatar = document.getElementById('avatarBox');
   if (_uiAvatar) {
     _uiAvatar.addEventListener('click', () => {
