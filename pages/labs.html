@@ -45,8 +45,10 @@
     </header>
 
 <section class="section">
-  <div class="grid-3">
-    <div class="card card-ciber" style="text-align: center;">
+  <!-- Cambiamos grid-3 por flex para centrar la última fila -->
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-top: 2rem;">
+    
+    <div class="card card-ciber" style="text-align: center; flex: 1 1 280px; max-width: 360px;">
       <div class="card-badge">Defensa</div>
       <img src="../assets/img/cs.png" alt="Ciberseguridad" class="card-img">
       <h3>Ciberseguridad</h3>
@@ -54,7 +56,7 @@
       <a href="#" class="btn btn-primary" style="width:100%;">Entrar</a>
     </div>
 
-    <div class="card card-hackodeo" style="text-align: center;">
+    <div class="card card-hackodeo" style="text-align: center; flex: 1 1 280px; max-width: 360px;">
       <div class="card-badge badge-magenta">Ataque</div>
       <img src="../assets/img/hc.png" alt="Hackodeo" class="card-img">
       <h3>Hackodeo</h3>
@@ -62,7 +64,7 @@
       <a href="#" class="btn btn-primary btn-magenta" style="width:100%;">Entrar</a>
     </div>
 
-    <div class="card card-gamercraft" style="text-align: center;">
+    <div class="card card-gamercraft" style="text-align: center; flex: 1 1 280px; max-width: 360px;">
       <div class="card-badge">Creación</div>
       <img src="../assets/img/gc.png" alt="Gamercraft" class="card-img">
       <h3>Gamercraft</h3>
@@ -70,7 +72,7 @@
       <a href="#" class="btn btn-primary" style="width:100%;">Entrar</a>
     </div>
 
-    <div class="card card-android" style="text-align: center;">
+    <div class="card card-android" style="text-align: center; flex: 1 1 280px; max-width: 360px;">
       <div class="card-badge">Sistemas</div>
       <img src="../assets/img/sm.png" alt="Software Móvil" class="card-img">
       <h3>Software Móvil</h3>
@@ -78,15 +80,16 @@
       <a href="#" class="btn btn-primary" style="width:100%;">Entrar</a>
     </div>
 
-    <div class="card card-linux" style="text-align: center;">
+    <div class="card card-linux" style="text-align: center; flex: 1 1 280px; max-width: 360px;">
       <div class="card-badge">Sistemas</div>
       <img src="../assets/img/sw.png" alt="Software Computer" class="card-img">
       <h3>Software Computer</h3>
       <p style="margin-bottom: 1rem;">Desarrollo de software a nivel de sistema para computadoras y servidores.</p>
       <a href="#" class="btn btn-primary" style="width:100%;">Entrar</a>
     </div>
+
   </div>
- </section>
+</section>
 </main>
 
   <footer class="footer">
