@@ -37,19 +37,33 @@
           <a href="pages/labs.html" class="btn btn-ghost">&lt;Ir a especialidades&gt;</a>
         </div>
       </div>
-      
+
       <!-- /// 3. CAJA DEL AVATAR 3D \\\ -->
-      <div class="hero-avatar">
-        <div class="avatar-glow"></div>
-        <div class="avatar-box" id="avatarBox" style="position: relative; overflow: hidden; padding: 0;">
-          <div id="vrm-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1;"></div>
-          <div style="position: absolute; bottom: 1rem; left: 0; width: 100%; text-align: center; z-index: 2; pointer-events: none;">
-            <p class="avatar-name" style="margin: 0; text-shadow: 0 0 10px #000;">Alexander</p>
-            <p class="avatar-status" style="text-shadow: 0 0 5px #000; font-family: monospace; color: #00ff88; font-size: 0.8rem; margin-top: 5px;">cargando...</p>
-          </div>
-        </div>
+<div class="hero-avatar">
+  <div class="avatar-glow"></div>
+  <div class="avatar-box" id="avatarBox" style="position: relative; overflow: hidden; padding: 0;">
+    
+    <!-- Aquí irá el lienzo 3D -->
+    <div id="vrm-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1;">
+      
+      <!-- Interfaz inicial de descarga -->
+      <div id="ui-carga-3d" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; padding: 1rem; text-align: center;">
+        <p style="font-family: monospace; color: var(--cian); margin-bottom: 0.5rem; font-size: 0.9rem;">SYS.AVATAR</p>
+        <p style="color: var(--texto-dim); font-size: 0.8rem; margin-bottom: 1.5rem;">Modelo 3D: 7.75 MB</p>
+        <button id="btnDescargarModelo" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem; margin-bottom: 0.5rem; width: 100%;">Descargar Avatar</button>
+        <button id="btnOmitirModelo" class="btn btn-ghost" style="padding: 0.5rem 1rem; font-size: 0.8rem; width: 100%;">Omitir</button>
       </div>
-    </section>
+
+    </div>
+
+    <!-- Texto que aparece abajo del avatar -->
+    <div style="position: absolute; bottom: 1rem; left: 0; width: 100%; text-align: center; z-index: 2; pointer-events: none;">
+      <p class="avatar-name" style="margin: 0; text-shadow: 0 0 10px #000;">Alexander</p>
+      <p class="avatar-status" id="texto-status-3d" style="text-shadow: 0 0 5px #000; font-family: monospace; color: #00ff88; font-size: 0.8rem; margin-top: 5px;">Esperando...</p>
+    </div>
+
+  </div>
+</div>
 
     <!-- /// 4. RUTAS DE APRENDIZAJE \\\ -->
     <section class="section">
