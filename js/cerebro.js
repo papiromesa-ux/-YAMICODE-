@@ -1,22 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const _uiToggle = document.getElementById('menuToggle');
-  const _uiNav = document.getElementById('nav');
+  const _nav = document.getElementById('nav');
+  const _menuToggle = document.getElementById('menuToggle');
 
-  if (_uiToggle && _uiNav) {
-    _uiToggle.addEventListener('click', () => {
-      const _isAct = _uiNav.classList.toggle('active');
-      _uiToggle.textContent = _isAct ? '[X]' : '[=]';
-      _uiToggle.setAttribute('aria-expanded', _isAct);
+  if (_menuToggle && _nav) {
+    _menuToggle.addEventListener('click', () => {
+      _nav.classList.toggle('active');
+      _menuToggle.classList.toggle('active');
     });
+  }
 
-    _uiNav.querySelectorAll('a').forEach(_link => {
-      _link.addEventListener('click', () => {
-        _uiNav.classList.remove('active');
-        _uiToggle.textContent = '[=]';
-        _uiToggle.setAttribute('aria-expanded', 'false');
+  // Cerrar menú al hacer clic en un enlace
+  if (_nav) {
+    _nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        _nav.classList.remove('active');
+        if (_menuToggle) _menuToggle.classList.remove('active');
       });
     });
   }
+});
+
 
   const _uiAvatar = document.getElementById('avatarBox');
   if (_uiAvatar) {
