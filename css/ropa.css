@@ -142,3 +142,61 @@ body::before { content: ''; position: fixed; inset: 0; background-image: linear-
   .hero-btns { justify-content: center; }
   .avatar-box { margin: 0 auto; }
 }
+
+/* /// 12. COLORES PERSONALIZADOS DE TARJETAS \\\ */
+
+/* Hackodeo: Rojo Carmesí, Negro Carbón, Gris */
+.card-hackodeo {
+  background: linear-gradient(135deg, rgba(150, 0, 24, 0.8), rgba(26, 26, 26, 0.9), rgba(128, 128, 128, 0.5));
+  border-color: #960018;
+}
+.card-hackodeo:hover { box-shadow: 0 0 20px rgba(150, 0, 24, 0.6); }
+.card-hackodeo .btn { background: linear-gradient(135deg, #960018, #808080); color: #fff; }
+
+/* Ciberseguridad: Azul Marino, Verde Oscuro, Blanco */
+.card-ciber {
+  background: linear-gradient(135deg, rgba(0, 0, 128, 0.8), rgba(0, 77, 0, 0.8), rgba(255, 255, 255, 0.2));
+  border-color: #000080;
+}
+.card-ciber:hover { box-shadow: 0 0 20px rgba(0, 0, 128, 0.6); }
+.card-ciber .btn { background: linear-gradient(135deg, #000080, #004d00); color: #fff; }
+
+/* Gamercraft: Naranja Vibrante, Amarillo Cielo, Violeta */
+.card-gamercraft {
+  background: linear-gradient(135deg, rgba(255, 94, 0, 0.8), rgba(224, 247, 250, 0.4), rgba(123, 44, 191, 0.8));
+  border-color: #ff5e00;
+}
+.card-gamercraft:hover { box-shadow: 0 0 20px rgba(255, 94, 0, 0.6); }
+.card-gamercraft .btn { background: linear-gradient(135deg, #ff5e00, #7b2cbf); color: #fff; }
+
+/* APK y EXE: Verde Claro, Celeste, Negro */
+.card-apk-exe {
+  background: linear-gradient(135deg, rgba(0, 255, 136, 0.6), rgba(0, 245, 255, 0.6), rgba(0, 0, 0, 0.9));
+  border-color: #00f5ff;
+}
+.card-apk-exe:hover { box-shadow: 0 0 20px rgba(0, 245, 255, 0.6); }
+.card-apk-exe .btn { background: linear-gradient(135deg, #00ff88, #00f5ff); color: #000; }
+
+/* PlayStore y Windows Store: Blanco, Verde Oscuro, Azul */
+.card-stores {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(0, 77, 0, 0.8), rgba(0, 0, 255, 0.8));
+  border-color: #0000ff;
+}
+.card-stores:hover { box-shadow: 0 0 20px rgba(0, 0, 255, 0.6); }
+.card-stores .btn { background: linear-gradient(135deg, #ffffff, #0000ff); color: #000; }
+
+/* Software Móvil (Colores de Android) */
+.card-android {
+  background: linear-gradient(135deg, rgba(164, 198, 57, 0.7), rgba(0, 0, 0, 0.9));
+  border-color: #a4c639;
+}
+.card-android:hover { box-shadow: 0 0 20px rgba(164, 198, 57, 0.6); }
+.card-android .btn { background: linear-gradient(135deg, #a4c639, #000000); color: #fff; }
+
+/* Software Computer (Colores de Linux/Monitor) */
+.card-linux {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.6), rgba(0, 0, 0, 0.9), rgba(0, 245, 255, 0.6));
+  border-color: #ffd700;
+}
+.card-linux:hover { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+.card-linux .btn { background: linear-gradient(135deg, #ffd700, #00f5ff); color: #000; }
