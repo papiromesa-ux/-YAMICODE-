@@ -3,53 +3,31 @@ import { GLTFLoader } from 'https://unpkg.com/three@0.160.0/examples/jsm/loaders
 import { VRMLoaderPlugin, VRMUtils } from 'https://unpkg.com/@pixiv/three-vrm@3.0.0/lib/three-vrm.module.js';
 
 const _initAvatar3D = () => {
-  const _container = document.getElementById('vrm-container');
-  const _uiCarga = document.getElementById('ui-carga-3d');
+  const _vrmContainer = document.getElementById('vrm-container');
+  const _panelDescargas = document.getElementById('panel-descargas');
   const _btnDescargar = document.getElementById('btnDescargarModelo');
-  const _btnOmitir = document.getElementById('btnOmitirModelo');
-  const _statusTexto = document.getElementById('texto-status-3d');
+  const _barraFondo = document.getElementById('barra-progreso-3d');
+  const _barraFill = document.getElementById('progreso-fill');
+  const _textoProgreso = document.getElementById('texto-progreso');
+  const _textoAvatar = document.getElementById('texto-avatar');
 
-  if (!_container || !_btnDescargar) return;
+  if (!_btnDescargar) return;
 
-  // BOTÓN OMITIR: Muestra un ícono en lugar del modelo
-  _btnOmitir.addEventListener('click', () => {
-    _uiCarga.style.display = 'none';
-    _statusTexto.textContent = "Modo Ligero";
-    _statusTexto.style.color = "var(--texto-dim)";
-    _container.innerHTML = `<div style="display: flex; justify-content: center; align-items: center; height: 100%;"><span style="font-size: 4rem; font-family: 'Orbitron', sans-serif; color: var(--cian);">[A]</span></div>`;
-  });
-
-  // BOTÓN DESCARGAR: Inicia el motor 3D
   _btnDescargar.addEventListener('click', () => {
-    _uiCarga.style.display = 'none'; // Ocultamos los botones
-    _statusTexto.textContent = "Descargando...";
-    
+    // 1. Desaparecemos el botón y mostramos la barra
+    _btnDescargar.style.display = 'none';
+    _barraFondo.style.display = 'block';
+    _textoProgreso.style.display = 'block';
+
     try {
-      // 1. Configuramos la escena
       const _scene = new THREE.Scene();
-      const _camera = new THREE.PerspectiveCamera(30, _container.clientWidth / _container.clientHeight, 0.1, 20);
+      const _camera = new THREE.PerspectiveCamera(30, _vrmContainer.clientWidth / _vrmContainer.clientHeight, 0.1, 20);
       _camera.position.set(0, 1.3, 2.5);
 
       const _renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      _renderer.setSize(_container.clientWidth, _container.clientHeight);
+      _renderer.setSize(_vrmContainer.clientWidth, _vrmContainer.clientHeight);
       _renderer.setPixelRatio(window.devicePixelRatio);
       
-      _container.innerHTML = '';
-      _container.appendChild(_renderer.domElement);
-
-      // 2. Luces Neón
-      const _ambient = new THREE.AmbientLight(0xffffff, 0.6);
-      _scene.add(_ambient);
-
-      const _lightCyan = new THREE.DirectionalLight(0x00f5ff, 2);
-      _lightCyan.position.set(2, 3, 2);
-      _scene.add(_lightCyan);
-
-      const _lightMagenta = new THREE.DirectionalLight(0xff2e97, 2);
-      _lightMagenta.position.set(-2, 3, 1);
-      _scene.add(_lightMagenta);
-
-      // 3. Cargar el modelo VRM
       const _loader = new GLTFLoader();
       _loader.register((parser) => new VRMLoaderPlugin(parser));
 
@@ -58,6 +36,13 @@ const _initAvatar3D = () => {
       _loader.load(
         _path, 
         (gltf) => {
+          // 2. Cuando termina, ocultamos el panel y mostramos el 3D
+          _panelDescargas.style.display = 'none';
+          _textoAvatar.style.display = 'block';
+          
+          _vrmContainer.innerHTML = '';
+          _vrmContainer.appendChild(_renderer.domElement);
+
           const _vrm = gltf.userData.vrm;
           VRMUtils.removeUnnecessaryVertices(gltf.scene);
           VRMUtils.combineSkeletons(gltf.scene);
@@ -65,10 +50,15 @@ const _initAvatar3D = () => {
           _vrm.scene.rotation.y = Math.PI; 
           _scene.add(_vrm.scene);
 
-          _statusTexto.textContent = "Hacker en línea";
-          _statusTexto.style.color = "#00ff88";
+          const _ambient = new THREE.AmbientLight(0xffffff, 0.6);
+          _scene.add(_ambient);
+          const _lightCyan = new THREE.DirectionalLight(0x00f5ff, 2);
+          _lightCyan.position.set(2, 3, 2);
+          _scene.add(_lightCyan);
+          const _lightMagenta = new THREE.DirectionalLight(0xff2e97, 2);
+          _lightMagenta.position.set(-2, 3, 1);
+          _scene.add(_lightMagenta);
 
-          // Animación
           const _clock = new THREE.Clock();
           const _animate = () => {
             requestAnimationFrame(_animate);
@@ -81,24 +71,35 @@ const _initAvatar3D = () => {
           };
           _animate();
         },
-        undefined,
+        (xhr) => {
+          // 3. Actualizamos la barra de progreso
+          if (xhr.total > 0) {
+            const _porcentaje = Math.round((xhr.loaded / xhr.total) * 100);
+            _barraFill.style.width = _porcentaje + '%';
+            _textoProgreso.textContent = _porcentaje + '%';
+          } else {
+            // Si no hay total (a veces pasa en GitHub), mostramos los MB descargados
+            _textoProgreso.textContent = Math.round(xhr.loaded / 1048576) + " MB...";
+          }
+        },
         (error) => {
+          // 4. SI HAY UN ERROR, LO MOSTRAMOS EN PANTALLA PARA SABER QUÉ PASA
           console.error('Error al cargar el VRM:', error);
-          _statusTexto.textContent = "Error al cargar";
-          _statusTexto.style.color = "var(--magenta)";
-          _container.innerHTML = `<div style="display: flex; justify-content: center; align-items: center; height: 100%;"><p style="color: var(--magenta); font-family: monospace; font-size: 0.8rem;">Fallo de red 3D</p></div>`;
+          _textoProgreso.textContent = "Error de descarga";
+          _textoProgreso.style.color = "var(--magenta)";
+          alert("Error técnico: No se pudo descargar el modelo 3D. Revisa tu conexión a internet o si el archivo está dañado.");
         }
       );
 
       window.addEventListener('resize', () => {
-        _camera.aspect = _container.clientWidth / _container.clientHeight;
+        _camera.aspect = _vrmContainer.clientWidth / _vrmContainer.clientHeight;
         _camera.updateProjectionMatrix();
-        _renderer.setSize(_container.clientWidth, _container.clientHeight);
+        _renderer.setSize(_vrmContainer.clientWidth, _vrmContainer.clientHeight);
       });
 
     } catch (error) {
       console.error('Error crítico 3D:', error);
-      _statusTexto.textContent = "Fallo del sistema";
+      alert("Fallo del sistema: Las librerías 3D no pudieron cargar. Es posible que tu red las esté bloqueando.");
     }
   });
 };
