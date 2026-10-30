@@ -4,36 +4,58 @@ import { VRMLoaderPlugin, VRMUtils } from './libs/three-vrm.module.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   
-  // /// 1. LÓGICA PARA CERRAR EL MENÚ \\\
+  // /// 1. LÓGICA DEL MENÚ HAMBURGUESA CSS \\\
   const _nav = document.getElementById('nav');
-  const _navLinks = _nav.querySelectorAll('a');
-  _navLinks.forEach(link => {
-    link.addEventListener('click', () => _nav.classList.remove('active'));
+  const _menuToggle = document.getElementById('menuToggle');
+
+  _menuToggle.addEventListener('click', () => {
+    _nav.classList.toggle('active');
+    _menuToggle.classList.toggle('active');
   });
 
-  // /// 2. LÓGICA DEL MENÚ DE DESCARGAS \\\
+  // Cerrar menú al hacer clic en un enlace
+  _nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      _nav.classList.remove('active');
+      _menuToggle.classList.remove('active');
+    });
+  });
+
+  // /// 2. MODAL DE DESCARGAS \\\
   const _modalDescargas = document.getElementById('modal-descargas');
   const _btnAbrirDescargas = document.getElementById('btnAbrirDescargas');
   const _btnCerrarDescargas = document.getElementById('btnCerrarDescargas');
 
   _btnAbrirDescargas.addEventListener('click', () => {
-    _nav.classList.remove('active'); // Cierra el menú
+    _nav.classList.remove('active');
+    _menuToggle.classList.remove('active');
     _modalDescargas.style.display = 'flex';
   });
   _btnCerrarDescargas.addEventListener('click', () => _modalDescargas.style.display = 'none');
 
-  // /// 3. LÓGICA DEL MENÚ DE REPORTES \\\
+  // /// 3. MODAL DE REPORTES (Envío a WhatsApp) \\\
   const _modalReportes = document.getElementById('modal-reportes');
   const _btnAbrirReportes = document.getElementById('btnAbrirReportes');
   const _btnCerrarReportes = document.getElementById('btnCerrarReportes');
+  const _btnEnviarWhatsApp = document.getElementById('btnEnviarWhatsApp');
+  const _txtReporte = document.getElementById('txtReporte');
 
   _btnAbrirReportes.addEventListener('click', () => {
-    _nav.classList.remove('active'); // Cierra el menú
+    _nav.classList.remove('active');
+    _menuToggle.classList.remove('active');
     _modalReportes.style.display = 'flex';
   });
   _btnCerrarReportes.addEventListener('click', () => _modalReportes.style.display = 'none');
 
-  // /// 4. CARGAR MODELO 3D \\\
+  _btnEnviarWhatsApp.addEventListener('click', () => {
+    const mensaje = _txtReporte.value.trim();
+    const numero = "50368405099"; // Código de país + número
+    const texto = mensaje ? `Hola, vengo de YamiCode. Reporte: ${mensaje}` : "Hola, vengo de YamiCode. Quiero reportar un error.";
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank');
+  });
+
+  // /// 4. CARGAR MODELO 3D (Alexander o Andrea) \\\
   const _vrmContainer = document.getElementById('vrm-container');
   const _textoAvatar = document.getElementById('texto-avatar');
   const _nombreAvatarActual = document.getElementById('nombre-avatar-actual');
@@ -64,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const _scene = new THREE.Scene();
       const _camera = new THREE.PerspectiveCamera(30, _vrmContainer.clientWidth / _vrmContainer.clientHeight, 0.1, 20);
       
-      // Cámara ajustada (Z=4.5) para que se vea completo en el cuadro grande
       _camera.position.set(0, 1.4, 4.5);
       _camera.lookAt(0, 1.2, 0);
 
@@ -154,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
   _botonesEliminar.forEach(btn => {
     btn.addEventListener('click', (e) => {
       const modelo = e.currentTarget.getAttribute('data-modelo');
-      if (confirm("¿Seguro que quieres eliminar " + modelo + " de la memoria? Se tendrá que volver a descargar.")) {
+      if (confirm("¿Seguro que quieres eliminar " + modelo + "? Se tendrá que volver a descargar.")) {
         location.reload();
       }
     });
