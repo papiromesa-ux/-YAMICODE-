@@ -1,17 +1,19 @@
 /* /// 1. VARIABLES \\\ */
+/* /// 1. VARIABLES (PALETA RECOMENDADA POR EL PROFESIONAL) \\\ */
 :root {
-  --bg-dark: #0a0a12;
-  --bg-mid: #12121f;
-  --bg-card: #1a1a2e;
-  --cian: #00f5ff;
-  --violeta: #7b2cbf;
-  --magenta: #ff2e97;
-  --texto: #e6e6f0;
-  --texto-dim: #9a9ab0;
-  --borde: rgba(0, 245, 255, 0.15);
-  --glow: 0 0 20px rgba(0, 245, 255, 0.4);
+  --bg-dark: #0f0f11;       /* Negro pálido / grisáceo oscuro */
+  --bg-mid: #1a1a1f;        /* Negro un poco más claro para contraste */
+  --bg-card: #23232a;       /* Para las tarjetas */
+  
+  --cian: #fce205;          /* Reemplazamos el cian por el Amarillo pálido/triste */
+  --violeta: #3b1b5c;       /* Morado oscuro profundo */
+  --magenta: #8b2fc9;       /* Un morado más claro para los acentos */
+  
+  --texto: #e6e6f0;         
+  --texto-dim: #9a9ab0;     
+  --borde: rgba(252, 226, 5, 0.15); 
+  --glow: 0 0 20px rgba(252, 226, 5, 0.3); 
 }
-
 /* /// 2. RESET Y FONDO \\\ */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Rajdhani', sans-serif; background: var(--bg-dark); color: var(--texto); line-height: 1.6; overflow-x: hidden; }
