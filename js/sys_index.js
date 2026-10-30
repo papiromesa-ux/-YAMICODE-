@@ -1,6 +1,8 @@
+// /// 1. IMPORTACIONES \\\
 import { _secAuth } from "./firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+// /// 2. LÓGICA DE SESIÓN \\\
 onAuthStateChanged(_secAuth, (_sysUser) => {
   const _uiBtn = document.getElementById('navAuthBtn');
   const _uiName = document.getElementById('userName');
@@ -9,10 +11,14 @@ onAuthStateChanged(_secAuth, (_sysUser) => {
 
   if (_sysUser) {
     const _alias = _sysUser.email.split('@')[0];
-    _uiName.textContent = _alias;
-    _uiInit.textContent = _alias.charAt(0).toUpperCase();
-    _uiStat.textContent = "Hacker en línea";
-    _uiBtn.textContent = "Mi Perfil";
-    _uiBtn.href = "pages/perfil.html";
+    
+    if (_uiName) _uiName.textContent = _alias;
+    if (_uiInit) _uiInit.textContent = _alias.charAt(0).toUpperCase();
+    if (_uiStat) _uiStat.textContent = "Hacker en línea";
+    
+    if (_uiBtn) {
+      _uiBtn.textContent = "Mi Perfil";
+      _uiBtn.href = "pages/perfil.html";
+    }
   }
 });
