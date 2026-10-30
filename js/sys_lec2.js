@@ -1,8 +1,10 @@
+// /// 1. IMPORTACIONES \\\
 import { _secAuth } from "./firebase.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { validarFase3 } from "./sys_validador.js";
 import { crearAntiTrampas } from "./sys_antitrampas.js";
 
+// /// 2. SEGURIDAD DE SESIÓN Y PROGRESO \\\
 onAuthStateChanged(_secAuth, (_u) => {
   if (!_u) {
     alert("ACCESO RESTRINGIDO: Debes iniciar sesión.");
@@ -15,13 +17,16 @@ onAuthStateChanged(_secAuth, (_u) => {
   }
 });
 
+// /// 3. ANTI-TRAMPAS \\\
 const _anti = crearAntiTrampas({
   alExpulsar: ({ motivo }) => {
     window.location.href = `bloqueo.html?motivo=${motivo}`;
   }
 });
+document.body.classList.add('en-examen');
 _anti.activar();
 
+// /// 4. LÓGICA DE VALIDACIÓN \\\
 const _btn = document.getElementById("btnProbar");
 const _txtArea = document.getElementById("codigoEstudiante");
 const _fb = document.getElementById("feedback");
@@ -35,9 +40,7 @@ _btn.addEventListener("click", async () => {
   _fb.style.display = "none";
 
   try {
-    // Regla: Busca la constante direccion con la url exacta
     const _reglas = [{ fuente: "^const\\s+direccion\\s*=\\s*[\\"']https:\\/\\/yamicode\\.web[\\"'];?$", etiqueta: "Constante direccion correcta" }];
-    
     const _res = await validarFase3(_in, { reglas: _reglas }, { modulo: "js" });
 
     if (_res.ok) {
