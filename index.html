@@ -38,28 +38,57 @@
         </div>
       </div>
 
-      <!-- /// 3. CAJA DEL AVATAR 3D \\\ -->
+      <!-- /// 3. CAJA DEL AVATAR 3D (ESTILO GESTOR DE DESCARGAS) \\\ -->
 <div class="hero-avatar">
   <div class="avatar-glow"></div>
-  <div class="avatar-box" id="avatarBox" style="position: relative; overflow: hidden; padding: 0;">
+  <div class="avatar-box" id="avatarBox" style="position: relative; overflow: hidden; padding: 0; background: #0a0a12;">
     
-    <!-- Aquí irá el lienzo 3D -->
-    <div id="vrm-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1;">
+    <!-- Aquí irá el lienzo 3D cuando cargue -->
+    <div id="vrm-container" style="width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1;"></div>
+
+    <!-- PANEL DE DESCARGAS (Estilo Call of Duty) -->
+    <div id="panel-descargas" style="position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; background: rgba(10, 10, 18, 0.95); border: 1px solid var(--borde);">
       
-      <!-- Interfaz inicial de descarga -->
-      <div id="ui-carga-3d" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; padding: 1rem; text-align: center;">
-        <p style="font-family: monospace; color: var(--cian); margin-bottom: 0.5rem; font-size: 0.9rem;">SYS.AVATAR</p>
-        <p style="color: var(--texto-dim); font-size: 0.8rem; margin-bottom: 1.5rem;">Modelo 3D: 7.75 MB</p>
-        <button id="btnDescargarModelo" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem; margin-bottom: 0.5rem; width: 100%;">Descargar Avatar</button>
-        <button id="btnOmitirModelo" class="btn btn-ghost" style="padding: 0.5rem 1rem; font-size: 0.8rem; width: 100%;">Omitir</button>
+      <!-- Pestañas (Kiosco, Modelos, Otros) -->
+      <div style="display: flex; border-bottom: 1px solid var(--borde); background: rgba(0,0,0,0.5);">
+        <button class="tab-descarga" style="flex: 1; padding: 10px; background: transparent; border: none; color: var(--texto-dim); font-weight: bold; cursor: not-allowed; opacity: 0.5;">Kiosco</button>
+        <button class="tab-descarga" style="flex: 1; padding: 10px; background: rgba(0, 245, 255, 0.1); border: none; color: var(--cian); font-weight: bold; border-bottom: 2px solid var(--cian); cursor: default;">Modelos</button>
+        <button class="tab-descarga" style="flex: 1; padding: 10px; background: transparent; border: none; color: var(--texto-dim); font-weight: bold; cursor: not-allowed; opacity: 0.5;">Otros</button>
       </div>
 
+      <!-- Contenido de la pestaña "Modelos" -->
+      <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 1rem;">
+        
+        <!-- Fila del archivo Alexander -->
+        <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+          <div style="text-align: left;">
+            <p style="color: var(--texto); font-weight: bold; font-size: 0.9rem; margin: 0;">Alexander.vrm</p>
+            <p style="color: var(--texto-dim); font-size: 0.75rem; margin: 0;">7.75 MB</p>
+          </div>
+          
+          <!-- Botón de descarga (Flecha) -->
+          <button id="btnDescargarModelo" style="background: #333; border: 1px solid var(--borde); color: #fff; width: 40px; height: 40px; border-radius: 4px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Barra de progreso (oculta al inicio) -->
+        <div id="barra-progreso-3d" style="display: none; width: 100%; height: 6px; background: #000; border-radius: 3px; margin-top: 15px; border: 1px solid var(--borde); overflow: hidden;">
+          <div id="progreso-fill" style="width: 0%; height: 100%; background: var(--cian); transition: width 0.2s;"></div>
+        </div>
+        <p id="texto-progreso" style="display: none; text-align: center; color: var(--cian); font-size: 0.8rem; margin-top: 5px;">0%</p>
+
+      </div>
     </div>
 
-    <!-- Texto que aparece abajo del avatar -->
-    <div style="position: absolute; bottom: 1rem; left: 0; width: 100%; text-align: center; z-index: 2; pointer-events: none;">
+    <!-- Texto que aparece abajo del avatar (SOLO cuando ya cargó) -->
+    <div id="texto-avatar" style="display: none; position: absolute; bottom: 1rem; left: 0; width: 100%; text-align: center; z-index: 2; pointer-events: none;">
       <p class="avatar-name" style="margin: 0; text-shadow: 0 0 10px #000;">Alexander</p>
-      <p class="avatar-status" id="texto-status-3d" style="text-shadow: 0 0 5px #000; font-family: monospace; color: #00ff88; font-size: 0.8rem; margin-top: 5px;">Esperando...</p>
+      <p class="avatar-status" style="text-shadow: 0 0 5px #000; font-family: monospace; color: #00ff88; font-size: 0.8rem; margin-top: 5px;">ONLINE</p>
     </div>
 
   </div>
