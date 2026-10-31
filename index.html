@@ -10,6 +10,10 @@
   <meta name="theme-color" content="#0a0a12">
 </head>
 <body>
+  <!-- PANTALLA DE CARGA (SPLASH SCREEN) -->
+<div id="splash-screen" style="position: fixed; inset: 0; background-color: #0a0a12; z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;">
+  <img src="assets/img/splash-alexander.png" alt="Cargando YamiCode..." style="width: 80%; max-width: 350px; border-radius: 20px; box-shadow: 0 0 30px rgba(123, 44, 191, 0.5);">
+</div>
 
   <!-- /// 1. HEADER (Menú Hamburguesa CSS) \\\ -->
   <header class="header">
@@ -207,5 +211,17 @@
     });
   }
   </script>
+ <script>
+  // Ocultar pantalla de carga después de 2.5 segundos
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const splash = document.getElementById('splash-screen');
+      if (splash) {
+        splash.style.opacity = '0'; // Lo hace transparente
+        setTimeout(() => splash.remove(), 500); // Lo borra del HTML
+      }
+    }, 2500); 
+  });
+</script>
 </body>
 </html>
